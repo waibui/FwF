@@ -14,7 +14,7 @@
 #  Author: waibui
 
 from optparse import OptionParser, OptionGroup, Values
-from core.setting import VERSION
+from core.setting import VERSION, WORDLIST_PATH, USER_AGENT_PATH
 
 def parse_args() -> Values:
     """Parses command-line arguments and returns the parsed values.
@@ -23,7 +23,7 @@ def parse_args() -> Values:
         Values: An object containing the parsed command-line arguments.
     """
     usage = "Usage: %prog [-u|--url] target [options]"
-    epilog = "See 'config.ini' for the example configuration file"
+    epilog = "See 'core/setting.py' for the example configuration file"
     parser = OptionParser(usage=usage, epilog=epilog, version=f"dirsearch v{VERSION}")
     
     # Core Settings
@@ -33,12 +33,20 @@ def parse_args() -> Values:
         action="append",
         dest="urls",
         metavar="URL",
-        help="Target URL(s)",
+        help="Target URL(s) example: https://example.com",
     )
     core.add_option(
         "-w", "--wordlists",
         action="store",
         dest="wordlists",
+        default=WORDLIST_PATH,
+        help="Wordlist files or directories contain wordlists (comma-separated)",
+    )
+    core.add_option(
+        "--ua", "--user-agent",
+        action="store",
+        dest="user-agent",
+        default=USER_AGENT_PATH,
         help="Wordlist files or directories contain wordlists (comma-separated)",
     )
     core.add_option(
@@ -70,6 +78,7 @@ def parse_args() -> Values:
         action="store",
         type="float",
         dest="timeout",
+        default=10,
         help="Connection timeout in seconds",
     )
     request.add_option(
@@ -77,14 +86,8 @@ def parse_args() -> Values:
         action="store",
         dest="http_method",
         metavar="METHOD",
+        default="GET",
         help="HTTP method (default: GET)",
-    )
-    request.add_option(
-        "-p", "--protocol",
-        action="store",
-        dest="protocol",
-        metavar="PROTOCOL",
-        help="Protocol (default: HTTPS)",
     )
     request.add_option(
         "--mc", "--match-code",

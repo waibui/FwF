@@ -13,8 +13,6 @@
 #
 #  Author: waibui
 
-VERSION = "1.0.0"
-
 BANNER = '''
 ██████╗ ███████╗██████╗ ██╗██████╗   %s
 ██╔══██╗██╔════╝██╔══██╗██║██╔══██╗  %s
@@ -23,3 +21,10 @@ BANNER = '''
 ██║     ███████║██████╔╝██║██║  ██║  %s
 ╚═╝     ╚══════╝╚═════╝ ╚═╝╚═╝  ╚═╝  %s                                                                         
 '''
+
+VERSION = "1.0.0"
+
+# OPTION DEFAULT
+WORDLIST_PATH = "statics/wordlist.txt"
+USER_AGENT_PATH = "statics/user-agent.txt"
+

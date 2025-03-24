@@ -13,14 +13,18 @@
 #
 #  Author: waibui
 
-import sys
-from parse.parse_cmd import parse_args
+from typing import Any
 
-sys.dont_write_bytecode = True
-
-def main():
-    parser = parse_args()
-    print(parser)
-
-if __name__ == "__main__":
-    main()
+option: dict[str, Any] = {
+    "urls": [],
+    "wordlists": "",
+    "user-agent": "",
+    "extensions": "",
+    "remove_extensions": False,
+    "thread_count": 40,
+    "timeout": 10.0,
+    "http_method": "GET",
+    "match_code": "",
+    "output_file": "",
+    "quiet": False,
+}
