@@ -21,10 +21,10 @@ BANNER = '''
 ██║     ███████║██████╔╝██║██║  ██║  %s
 ╚═╝     ╚══════╝╚═════╝ ╚═╝╚═╝  ╚═╝  %s                                                                         
 '''
-
+USAGE = "Usage: %prog [-u|--url] target [options]"
 VERSION = "1.0.0"
 
 # OPTION DEFAULT
 WORDLIST_PATH = "statics/wordlist.txt"
 USER_AGENT_PATH = "statics/user-agent.txt"
-
+DEFAULT_METHOD = "GET,POST,HEAD,PUT,DELETE"

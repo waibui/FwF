@@ -13,18 +13,17 @@
 #
 #  Author: waibui
 
-from typing import Any
+from optparse import Values
 
-option: dict[str, Any] = {
-    "urls": [],
-    "wordlists": "",
-    "user-agent": "",
-    "extensions": "",
-    "remove_extensions": False,
-    "thread_count": 40,
-    "timeout": 10.0,
-    "http_method": "GET",
-    "match_code": "",
-    "output_file": "",
-    "quiet": False,
-}
+class Option:
+    def __init__(self, value: Values = None):
+        self.url: str = value.url
+        self.wordlists: str = value.wordlists
+        self.user_agent: str = value.user_agent
+        self.thread_count: int = value.thread_count
+        self.timeout: float = value.timeout
+        self.http_method: str = value.http_method
+        self.match_code: str = value.match_code
+        self.output_file: str = value.output_file
+        self.quiet: bool = value.quiet
+    

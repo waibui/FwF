@@ -15,12 +15,17 @@
 
 import sys
 from parse.parse_cmd import parse_args
+from models.option import Option
+from controllers.controller import Controller
 
 sys.dont_write_bytecode = True
 
 def main():
     parser = parse_args()
-    print(parser)
+    option = Option(parser)
+    controller = Controller(option=option)
+    
+    controller.run()
 
 if __name__ == "__main__":
     main()

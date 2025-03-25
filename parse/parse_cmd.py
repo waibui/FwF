@@ -14,7 +14,9 @@
 #  Author: waibui
 
 from optparse import OptionParser, OptionGroup, Values
-from core.setting import VERSION, WORDLIST_PATH, USER_AGENT_PATH
+from core.setting import VERSION, USAGE, WORDLIST_PATH, USER_AGENT_PATH, DEFAULT_METHOD
+from views.logging import Logging
+from views.banner import print_banner
 
 def parse_args() -> Values:
     """Parses command-line arguments and returns the parsed values.
@@ -22,18 +24,18 @@ def parse_args() -> Values:
     Returns:
         Values: An object containing the parsed command-line arguments.
     """
-    usage = "Usage: %prog [-u|--url] target [options]"
+    print_banner(verbose=True)
     epilog = "See 'core/setting.py' for the example configuration file"
-    parser = OptionParser(usage=usage, epilog=epilog, version=f"dirsearch v{VERSION}")
+    parser = OptionParser(usage=USAGE, epilog=epilog, version=f"psdir v{VERSION}")
     
     # Core Settings
     core = OptionGroup(parser, "CORE SETTINGS")
     core.add_option(
         "-u", "--url",
-        action="append",
-        dest="urls",
+        action="store",
+        dest="url",
         metavar="URL",
-        help="Target URL(s) example: https://example.com",
+        help="Target URL example: https://example.com",
     )
     core.add_option(
         "-w", "--wordlists",
@@ -45,21 +47,9 @@ def parse_args() -> Values:
     core.add_option(
         "--ua", "--user-agent",
         action="store",
-        dest="user-agent",
+        dest="user_agent",
         default=USER_AGENT_PATH,
-        help="Wordlist files or directories contain wordlists (comma-separated)",
-    )
-    core.add_option(
-        "-e", "--extensions",
-        action="store",
-        dest="extensions",
-        help="Extension list, separated by commas (e.g., php, asp)",
-    )
-    core.add_option(
-        "--remove-extensions",
-        action="store_true",
-        dest="remove_extensions",
-        help="Remove extensions in all paths (e.g., admin.php -> admin)",
+        help="User-Agent files or directories contain useragent (comma-separated)",
     )
     
     # Performance & Request Settings
@@ -74,7 +64,7 @@ def parse_args() -> Values:
         help="Number of threads (default: 40)",
     )
     request.add_option(
-        "--timeout",
+        "--to", "--timeout",
         action="store",
         type="float",
         dest="timeout",
@@ -94,7 +84,8 @@ def parse_args() -> Values:
         action="store",
         dest="match_code",
         metavar="MATCH_CODE",
-        help="Match HTTP status code (default: not 404)",
+        default="200,204,301,302,307,401,403",
+        help=f"Match HTTP status code (default: 200,204,301,302,307,401,403)",
     )
     
     # Output & Logging Settings
@@ -118,5 +109,12 @@ def parse_args() -> Values:
     parser.add_option_group(output)
 
     options, _ = parser.parse_args()
-
+    
+    if not options.url:
+        parser.print_usage()
+        
+    if options.http_method not in DEFAULT_METHOD:
+        Logging.error(f"Invalid method {options.http_method}, please use one of the following methods: {DEFAULT_METHOD}")
+        exit(1)
+        
     return options
