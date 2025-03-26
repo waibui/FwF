@@ -25,6 +25,8 @@ from models.option import Option
 from views.logging import Logging
 from controllers.scan import scan
 
+from core.setting import DEFAULT_STATUS
+
 class Controller:
     """
     A multi-threaded controller for performing web path scanning.
@@ -67,6 +69,7 @@ class Controller:
         self.fetch_wordlist()
         self.handle_cookie()
         self.handle_proxy()
+        self.handle_status()
         self.print_options()
 
         start_t = time.time()
@@ -106,7 +109,6 @@ class Controller:
             user_agent=self.random_user_agent(),
             cookie=self.cookie,
             proxy=self.proxies,
-            wordlist_queue=self.wordlist_queue
         )
         if result:
             Logging.result(result['status'], result['url'])
@@ -213,6 +215,17 @@ class Controller:
         Processes and stores proxies as a dictionary.
         """
         self.proxies = self.parse_key_value_string(self.option.proxies)
+    
+    def handle_status(self):
+        """
+        Check if all provided status codes are valid.
+        """
+        valid_statuses = set(DEFAULT_STATUS.split(",")) 
+        requested_statuses = set(self.option.match_code.split(",")) 
+
+        if not requested_statuses.issubset(valid_statuses): 
+            Logging.error(f"Invalid status code '{self.option.match_code}'")
+            sys.exit(1)
 
     def random_user_agent(self):
         """

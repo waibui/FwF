@@ -14,7 +14,7 @@
 #  Author: waibui
 
 from optparse import OptionParser, OptionGroup, Values
-from core.setting import VERSION, USAGE, WORDLIST_PATH, USER_AGENT_PATH
+from core.setting import VERSION, USAGE, WORDLIST_PATH, USER_AGENT_PATH, DEFAULT_STATUS
 from views.banner import print_banner
 
 def parse_args() -> Values:
@@ -83,8 +83,8 @@ def parse_args() -> Values:
         action="store",
         dest="match_code",
         metavar="MATCH_CODE",
-        default="200,204,301,302,307,401,403",
-        help=f"Match HTTP status code (default: 200,204,301,302,307,401,403)",
+        default=DEFAULT_STATUS,
+        help=f"Match HTTP status code (default:{DEFAULT_STATUS})",
     )
     request.add_option(
         "--cookie",

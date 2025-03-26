@@ -3,7 +3,6 @@ charset-normalizer==3.4.1
 idna==3.10
 numpy==2.2.4
 pandas==2.2.3
-pdfkit==1.0.0
 python-dateutil==2.9.0.post0
 pytz==2025.2
 PyYAML==6.0.2

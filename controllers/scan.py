@@ -14,10 +14,9 @@
 #  Author: waibui
 
 import requests
-import queue
 from models.option import Option
 
-def scan(session: requests.Session, path: str, option: Option, wordlist_queue: queue.Queue ,user_agent: str, cookie: dict = None, proxy: dict = None):
+def scan(session: requests.Session, path: str, option: Option, user_agent: str, cookie: dict = None, proxy: dict = None):
     """
     Sends an HTTP request to a specific path on the server and checks the response.
 
