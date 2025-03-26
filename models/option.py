@@ -16,7 +16,25 @@
 from optparse import Values
 
 class Option:
+    """
+    A class to store configuration options for a web request.
+    
+    Attributes:
+        url (str): The target URL.
+        wordlists (str): The path to the wordlist file.
+        user_agent (str): The User-Agent string to use in requests.
+        thread_count (int): The number of concurrent threads.
+        timeout (float): The request timeout duration in seconds.
+        http_method (str): The HTTP method to use (e.g., GET, POST).
+        match_code (str): The response status codes to match.
+        output_file (str): The file to save output results.
+        cookie (str): The cookie string for authentication.
+        proxies (str): The proxy settings for requests.
+        allow_redirect (bool): Whether to allow HTTP redirects.
+    """
+    
     def __init__(self, value: Values = None):
+        """Initializes the Option class with provided values."""
         self.url: str = value.url
         self.wordlists: str = value.wordlists
         self.user_agent: str = value.user_agent
@@ -28,3 +46,4 @@ class Option:
         self.cookie: str = value.cookie
         self.proxies: str = value.proxies
         self.allow_redirect: bool = value.allow_redirect
+
