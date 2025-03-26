@@ -101,10 +101,10 @@ def parse_args() -> Values:
         help="PROXY for requests, eg: https://username:password@proxy.example.com:8080, https://proxy.example.com:8080"
     )
     request.add_option(
-        "--allow-redirect",
+        "--ar","--allow-redirect",
         action="store",
         dest="allow_redirect",
-        default=True,
+        default=False,
         metavar="ALLOW_REDIRECT",
         help="Accept redirect in request"
     )
