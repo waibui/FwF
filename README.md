@@ -9,14 +9,12 @@
 # PSDIR - Web path scanner
 
 ## Installation
----
 
 * Use git: `git clone https://github.com/waibui/psdir.git`
 
 * Download zip file: [https://github.com/waibui/psdir.git](https://github.com/waibui/psdir/archive/refs/heads/main.zip)
 
 ## Option
----
 ```
 Options:
   --version             show program's version number and exit
@@ -54,5 +52,4 @@ Options:
 See 'core/setting.py' for the example configuration file
 ```
 ## Usage
----
 ```python3 psdir.py [-u|--url] target [options]```
