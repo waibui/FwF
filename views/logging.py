@@ -16,27 +16,27 @@
 class Logging:
     @staticmethod
     def _base_logging_console(prefix, message):
-        print(f"[{prefix}] {message}")
+        print(f"{prefix}: {message}")
     
     @classmethod
     def info(cls, message):
-        cls._base_logging_console('INFO', message)
+        cls._base_logging_console('Info', message)
 
     @classmethod
     def debug(cls, message):
-        cls._base_logging_console('DEBUG', message)
+        cls._base_logging_console('Debug', message)
 
     @classmethod
     def warning(cls, message):
-        cls._base_logging_console('WARNING', message)
+        cls._base_logging_console('Warning', message)
 
     @classmethod
     def error(cls, message):
-        cls._base_logging_console('ERROR', message)
+        cls._base_logging_console('Error', message)
 
     @classmethod
     def critical(cls, message):
-        cls._base_logging_console('CRITICAL', message)
+        cls._base_logging_console('Critical', message)
         
     @classmethod
     def result(cls, statuscode, message):

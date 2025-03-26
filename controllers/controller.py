@@ -35,8 +35,9 @@ class Controller:
         """
         self.fetch_user_agent()
         self.fetch_wordlist()
+        self.handle_cookie()
+        self.handle_proxy()
         self.print_options()
-
         try:
             for _ in range(self.option.thread_count):
                 t = threading.Thread(target=self.worker,daemon=True)
@@ -58,7 +59,9 @@ class Controller:
             scan_path(
                 path=path,
                 option=self.option,
-                user_agent=self.random_user_agent()
+                user_agent=self.random_user_agent(),
+                cookie=self.cookie,
+                proxy=self.proxies,
             )
     
     def stop_threads(self):
@@ -85,10 +88,10 @@ class Controller:
             with open(self.option.user_agent, "r") as f:
                 self.user_agents.extend(f.read().splitlines())
         except FileNotFoundError:
-            Logging.error(f"File not found: {self.option.user_agent}")
+            Logging.error(f"Invalid user-agent path '{self.option.user_agent}'")
             exit(1)
         except Exception as e:
-            Logging.error(f"Error loading user agent file: {e}")
+            Logging.error(f"Error loading user-agent file: {e}")
             exit(1)
 
     def fetch_wordlist(self):
@@ -98,13 +101,44 @@ class Controller:
                 for line in f:
                     self.wordlist_queue.put(line.strip())
         except FileNotFoundError:
-            Logging.error(f"File not found: {self.option.wordlists}")
+            Logging.error(f"Invalid wordlist path '{self.option.wordlists}'")
             exit(1)
         except Exception as e:
             Logging.error(f"Error loading wordlist file: {e}")
             exit(1)
-                
+            
+    def parse_key_value_string(self, input_string):
+        """Convert a string in the format 'key:value,key2:value2' into a dictionary.
+
+        Args:
+            input_string (str): A string containing key-value pairs separated by commas.
+
+        Returns:
+            dict or None: A dictionary containing parsed key-value pairs, or None if input is invalid.
+        """
+        if not input_string:
+            return None
+
+        try:
+            return {
+                key.strip(): value.strip()
+                for pair in input_string.split(',')
+                if (key := pair.split(":", 1)[0]) and (value := pair.split(":", 1)[1])
+            }
+        except Exception:
+            return None
+
+
+    def handle_cookie(self):
+        """Process and store cookies as a dictionary."""
+        self.cookie = self.parse_key_value_string(self.option.cookie)
+
+    def handle_proxy(self):
+        """Process and store proxies as a dictionary."""
+        self.proxies = self.parse_key_value_string(self.option.proxies)
+
     def random_user_agent(self):
         """Get random user agent from file."""
-        return random.choice(self.user_agents)
+        return random.choice(self.user_agents) if self.user_agents else "Mozilla/5.0"
+
     

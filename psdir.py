@@ -17,15 +17,30 @@ import sys
 from parse.parse_cmd import parse_args
 from models.option import Option
 from controllers.controller import Controller
+from views.logging import Logging
+from core.setting import DEFAULT_METHOD, USAGE
 
 sys.dont_write_bytecode = True
 
 def main():
-    parser = parse_args()
-    option = Option(parser)
-    controller = Controller(option=option)
+    try:
+        parser = parse_args()
+        options = Option(parser)
+        
+        if not options.url:
+            Logging.error(f"No URL provided. Please specify a valid URL. \n{USAGE}")
+            exit(1)
+            
+        if options.http_method not in DEFAULT_METHOD:
+            Logging.error(f"Invalid HTTP method '{options.http_method}'. Allowed methods: {DEFAULT_METHOD}")
+            exit(1)
+        
+        controller = Controller(option=options)
+        controller.run()
     
-    controller.run()
+    except Exception as e:
+        Logging.error(f"Unexpected error: {e}")
+        exit(1)
 
 if __name__ == "__main__":
     main()

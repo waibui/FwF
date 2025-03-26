@@ -14,8 +14,7 @@
 #  Author: waibui
 
 from optparse import OptionParser, OptionGroup, Values
-from core.setting import VERSION, USAGE, WORDLIST_PATH, USER_AGENT_PATH, DEFAULT_METHOD
-from views.logging import Logging
+from core.setting import VERSION, USAGE, WORDLIST_PATH, USER_AGENT_PATH
 from views.banner import print_banner
 
 def parse_args() -> Values:
@@ -102,13 +101,6 @@ def parse_args() -> Values:
         help="PROXY for requests, eg: https://username:password@proxy.example.com:8080, https://proxy.example.com:8080"
     )
     request.add_option(
-        "--auth",
-        action="store",
-        dest="auth",
-        metavar="AUTH",
-        help="Basic authentication for request, eg: username:password",
-    )
-    request.add_option(
         "--allow-redirect",
         action="store",
         dest="allow_redirect",
@@ -137,13 +129,5 @@ def parse_args() -> Values:
     parser.add_option_group(output)
 
     options, _ = parser.parse_args()
-    
-    if not options.url:
-        parser.print_usage()
-        exit(1)
-        
-    if options.http_method not in DEFAULT_METHOD:
-        Logging.error(f"Invalid method {options.http_method}, please use one of the following methods: {DEFAULT_METHOD}")
-        exit(1)
         
     return options

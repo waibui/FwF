@@ -17,22 +17,29 @@ import requests
 from views.logging import Logging
 from models.option import Option
 
-def scan_path(path, option: Option, user_agent:str):
+def scan_path(path: str, option: Option, user_agent: str, cookie: dict = None, proxy: dict = None):
     url = f"{option.url}/{path}"
     headers = {"User-Agent": user_agent}
+    kwargs = {
+        "headers": headers, 
+        "timeout": option.timeout,
+        "allow_redirects": option.allow_redirect
+    }
+
+    if cookie:
+        kwargs["cookies"] = cookie  
+    if proxy:
+        kwargs["proxies"] = proxy  
+
     try:
         request_func = getattr(requests, option.http_method.lower(), requests.get)
-        response = request_func(
-            url=url, 
-            headers=headers, 
-            timeout=option.timeout
-        )
+        response = request_func(url=url, **kwargs)
 
         if str(response.status_code) in option.match_code:
             Logging.result(response.status_code, url)
 
     except KeyboardInterrupt:
         print("\nUser Interrupted")
+        exit(1)
     except requests.RequestException:
-        pass  
-
+        pass

@@ -28,5 +28,4 @@ class Option:
         self.quiet: bool = value.quiet
         self.cookie: str = value.cookie
         self.proxies: str = value.proxies
-        self.auth: str = value.auth
         self.allow_redirect: bool = value.allow_redirect
