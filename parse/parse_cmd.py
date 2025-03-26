@@ -35,21 +35,21 @@ def parse_args() -> Values:
         action="store",
         dest="url",
         metavar="URL",
-        help="Target URL example: https://example.com",
+        help="Target URL, eg: https://example.com, http://example.com",
     )
     core.add_option(
         "-w", "--wordlists",
         action="store",
         dest="wordlists",
         default=WORDLIST_PATH,
-        help="Wordlist files or directories contain wordlists (comma-separated)",
+        help="Wordlist files or directories contain wordlists",
     )
     core.add_option(
         "--ua", "--user-agent",
         action="store",
         dest="user_agent",
         default=USER_AGENT_PATH,
-        help="User-Agent files or directories contain useragent (comma-separated)",
+        help="User-Agent files or directories contain useragent",
     )
     
     # Performance & Request Settings
@@ -87,7 +87,35 @@ def parse_args() -> Values:
         default="200,204,301,302,307,401,403",
         help=f"Match HTTP status code (default: 200,204,301,302,307,401,403)",
     )
-    
+    request.add_option(
+        "--cookie",
+        action="store",
+        dest="cookie",
+        metavar="COOKIE",
+        help="The cookie of the requests, eg: key:value",
+    )
+    request.add_option(
+        "--proxies",
+        action="store",
+        dest="proxies",
+        metavar="PROXY",
+        help="PROXY for requests, eg: https://username:password@proxy.example.com:8080, https://proxy.example.com:8080"
+    )
+    request.add_option(
+        "--auth",
+        action="store",
+        dest="auth",
+        metavar="AUTH",
+        help="Basic authentication for request, eg: username:password",
+    )
+    request.add_option(
+        "--allow-redirect",
+        action="store",
+        dest="allow_redirect",
+        default=True,
+        metavar="ALLOW_REDIRECT",
+        help="Accept redirect in request"
+    )
     # Output & Logging Settings
     output = OptionGroup(parser, "OUTPUT & LOGGING SETTINGS")
     output.add_option(
@@ -112,6 +140,7 @@ def parse_args() -> Values:
     
     if not options.url:
         parser.print_usage()
+        exit(1)
         
     if options.http_method not in DEFAULT_METHOD:
         Logging.error(f"Invalid method {options.http_method}, please use one of the following methods: {DEFAULT_METHOD}")

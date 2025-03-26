@@ -15,14 +15,20 @@
 
 import requests
 from views.logging import Logging
+from models.option import Option
 
-def scan_path(url:str, method:str, user_agent:str, timeout:float, match_code:str):
+def scan_path(path, option: Option, user_agent:str):
+    url = f"{option.url}/{path}"
     headers = {"User-Agent": user_agent}
     try:
-        request_func = getattr(requests, method.lower(), requests.get)
-        response = request_func(url, headers=headers, timeout=timeout)
+        request_func = getattr(requests, option.http_method.lower(), requests.get)
+        response = request_func(
+            url=url, 
+            headers=headers, 
+            timeout=option.timeout
+        )
 
-        if str(response.status_code) in match_code:
+        if str(response.status_code) in option.match_code:
             Logging.result(response.status_code, url)
 
     except KeyboardInterrupt:

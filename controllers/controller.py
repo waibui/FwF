@@ -16,12 +16,14 @@
 import threading
 import random
 import sys
+
 from queue import Queue
-from controllers.scan_controller import scan_path
+from models.option import Option
 from views.logging import Logging
+from controllers.scan_controller import scan_path
 
 class Controller:
-    def __init__(self, option):
+    def __init__(self, option:Option):
         self.option = option
         self.wordlist_queue = Queue()
         self.user_agents = []
@@ -34,12 +36,10 @@ class Controller:
         self.fetch_user_agent()
         self.fetch_wordlist()
         self.print_options()
-        url = self.option.url.split(',')[0]
 
         try:
             for _ in range(self.option.thread_count):
-                t = threading.Thread(target=self.worker, args=(url,))
-                t.daemon = True 
+                t = threading.Thread(target=self.worker,daemon=True)
                 t.start()
                 self.threads.append(t)
 
@@ -47,20 +47,18 @@ class Controller:
                 t.join()
         
         except KeyboardInterrupt:
-            print("\nUser Interupt")
+            print("User Interupt")
             self.stop_threads()
             sys.exit(0)  
     
-    def worker(self, url):
+    def worker(self):
         """Get path from queue and scan"""
         while not self.wordlist_queue.empty():
-            url_scan = f"{url}/{self.wordlist_queue.get()}"
+            path = self.wordlist_queue.get()
             scan_path(
-                url=url_scan, 
-                method=self.option.http_method, 
-                user_agent=self.random_user_agent(),
-                timeout=self.option.timeout,
-                match_code=self.option.match_code
+                path=path,
+                option=self.option,
+                user_agent=self.random_user_agent()
             )
     
     def stop_threads(self):

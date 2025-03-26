@@ -21,7 +21,7 @@ BANNER = '''
 ██║     ███████║██████╔╝██║██║  ██║  %s
 ╚═╝     ╚══════╝╚═════╝ ╚═╝╚═╝  ╚═╝  %s                                                                         
 '''
-USAGE = "Usage: %prog [-u|--url] target [options]"
+USAGE = "Usage: %prog [-u|--url] target [options].\nChoose -h/--help option for more detail."
 VERSION = "1.0.0"
 
 # OPTION DEFAULT
