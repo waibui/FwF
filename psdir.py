@@ -29,7 +29,7 @@ def main():
         
         if not options.url:
             Logging.error(f"No URL provided. Please specify a valid URL. \n{USAGE}")
-            exit(1)
+            sys.exit(1)
             
         if options.http_method not in DEFAULT_METHOD:
             Logging.error(f"Invalid HTTP method '{options.http_method}'. Allowed methods: {DEFAULT_METHOD}")
@@ -37,10 +37,11 @@ def main():
         
         controller = Controller(option=options)
         controller.run()
-    
+    except KeyboardInterrupt: 
+        sys.exit(0)
     except Exception as e:
         Logging.error(f"Unexpected error: {e}")
-        exit(1)
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

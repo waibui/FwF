@@ -23,7 +23,7 @@ from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
 from models.option import Option
 from views.logging import Logging
-from controllers.scan_controller import scan
+from controllers.scan import scan
 
 class Controller:
     """
@@ -72,12 +72,21 @@ class Controller:
         start_t = time.time()
 
         try:
-            with ThreadPoolExecutor(max_workers=self.option.thread_count) as executor:
-                while not self.wordlist_queue.empty():
-                    executor.submit(self.worker, self.wordlist_queue.get())
+            executor = ThreadPoolExecutor(max_workers=self.option.thread_count)
+            while not self.wordlist_queue.empty():
+                executor.submit(self.worker, self.wordlist_queue.get())
 
+            executor.shutdown(wait=True) 
+            
+            if self.option.output_file is not None:
+                Logging.logging_to_file(self.option.output_file, self.results)
+                
         except KeyboardInterrupt:
-            print("User Interrupted")
+            print("\n[!] Keyboard Interrupt detected! Stopping all threads...")
+            if executor:
+                executor.shutdown(wait=False, cancel_futures=True) 
+            sys.exit(0)  
+        except Exception:
             sys.exit(0)
         finally:
             end_t = time.time()
@@ -97,6 +106,7 @@ class Controller:
             user_agent=self.random_user_agent(),
             cookie=self.cookie,
             proxy=self.proxies,
+            wordlist_queue=self.wordlist_queue
         )
         if result:
             Logging.result(result['status'], result['url'])

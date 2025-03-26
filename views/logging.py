@@ -13,6 +13,8 @@
 #
 #  Author: waibui
 
+from views.file_logging import FileLogging
+
 class Logging:
     @staticmethod
     def _base_logging_console(prefix, message):
@@ -41,3 +43,7 @@ class Logging:
     @classmethod
     def result(cls, statuscode, message):
         cls._base_logging_console(statuscode, message)
+    
+    @classmethod    
+    def logging_to_file(cls, file_path:str, data: list):
+        FileLogging.log(file_path, data)

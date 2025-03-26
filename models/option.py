@@ -25,7 +25,6 @@ class Option:
         self.http_method: str = value.http_method
         self.match_code: str = value.match_code
         self.output_file: str = value.output_file
-        self.quiet: bool = value.quiet
         self.cookie: str = value.cookie
         self.proxies: str = value.proxies
         self.allow_redirect: bool = value.allow_redirect

@@ -117,12 +117,6 @@ def parse_args() -> Values:
         metavar="FILE",
         help="Save output to a file",
     )
-    output.add_option(
-        "--quiet",
-        action="store_true",
-        dest="quiet",
-        help="Suppress all non-essential output",
-    )
 
     parser.add_option_group(core)
     parser.add_option_group(request)
