@@ -104,7 +104,7 @@ def parse_args() -> Values:
         "--ar","--allow-redirect",
         action="store",
         dest="allow_redirect",
-        default=False,
+        default=True,
         metavar="ALLOW_REDIRECT",
         help="Accept redirect in request"
     )

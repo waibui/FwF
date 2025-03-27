@@ -34,7 +34,9 @@ def scan(session: requests.Session, path: str, option: Option, user_agent: str, 
         dict: A dictionary containing the status code and URL if a valid response is found.
     """
     url = f"{option.url.rstrip('/')}/{path.lstrip('/')}"
-    headers = {"User-Agent": user_agent}
+    headers = {
+        "User-Agent": user_agent,
+    }
     kwargs = {
         "headers": headers, 
         "timeout": option.timeout,
