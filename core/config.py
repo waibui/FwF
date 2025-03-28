@@ -24,6 +24,7 @@ class Config:
     USAGE = "psdir.py [-u|--url] target [options]."
     CHOOSE = "Choose -h/--help option for more detail."
     EPILOG = "See 'core/setting.py' for the example configuration file"
+    FILETYPE =[".txt", ".log", ".json", ".csv", ".xlsx", ".yaml", ".yml", ".md", ".html", ".xml"]
     
     # Scan settings
     DEFAULT_TIMEOUT = 10
@@ -31,7 +32,6 @@ class Config:
     DEFAULT_STATUS = [200, 204, 301, 302, 307, 401, 403]
     DEFAULT_METHOD = ["GET", "POST", "HEAD", "PUT", "DELETE"]
     ALLOW_REDIRECT = True
-    
     
     # Application directory
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))

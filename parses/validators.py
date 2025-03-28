@@ -16,7 +16,7 @@
 import re
 import argparse
 from typing import List
-from core.config import Config  # Import cấu hình
+from core.config import Config 
 
 # ========== URL & REQUEST VALIDATORS ==========
 def is_valid_url(value: str) -> str:
@@ -65,8 +65,8 @@ def valid_proxy(value: str) -> str:
 
 def valid_output(value: str) -> str:
     """Validate the output file path format."""
-    if not value.endswith((".txt", ".log", ".json")):
-        raise argparse.ArgumentTypeError("Output file must have a valid extension (.txt, .log, .json).")
+    if not value.endswith(tuple(Config.FILETYPE)):
+        raise argparse.ArgumentTypeError(f"Output file must have a valid extension ({', '.join(Config.FILETYPE)}).")
     return value
 
 # ========== BOOLEAN & MATCH CODE VALIDATORS ==========

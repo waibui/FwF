@@ -31,7 +31,6 @@ class FileLogger:
     - `.md`: Logs data in Markdown table format.
     - `.xml`: Logs data in XML format.
     - `.yaml`: Logs data in YAML format.
-    - `.pdf`: Logs data in PDF format.
     - `.xlsx`: Logs data in Excel format.
     """
 
@@ -52,7 +51,7 @@ class FileLogger:
             cls._log_md(file_path, data)
         elif ext == "xml":
             cls._log_xml(file_path, data)
-        elif ext == "yaml" or ext == "yml":
+        elif ext in ["yaml", "yml"]:
             cls._log_yaml(file_path, data)
         elif ext == "xlsx":
             cls._log_xlsx(file_path, data)
@@ -66,24 +65,21 @@ class FileLogger:
     @staticmethod
     def _log_txt(file_path: str, data: list):
         with open(file_path, "w", encoding="utf-8") as f:
-            for line in data:
-                f.write(str(line) + "\n")
+            for status_code, url in data:
+                f.write(f"{status_code}, {url}\n")
 
     @staticmethod
     def _log_json(file_path: str, data: list):
+        json_data = [{"status_code": status_code, "url": url} for status_code, url in data]
         with open(file_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=4, ensure_ascii=False)
+            json.dump(json_data, f, indent=4, ensure_ascii=False)
 
     @staticmethod
     def _log_csv(file_path: str, data: list):
         with open(file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            if data and isinstance(data[0], dict):
-                writer.writerow(data[0].keys())  
-                for row in data:
-                    writer.writerow(row.values())
-            else:
-                writer.writerows(data)
+            writer.writerow(["status_code", "url"])  
+            writer.writerows(data)
 
     @staticmethod
     def _log_html(file_path: str, data: list):
@@ -100,46 +96,44 @@ class FileLogger:
                 </style>
             </head>
             <body>
+            <h2>Log Data</h2>
+            <table>
+            <tr><th>Status Code</th><th>URL</th></tr>
             """)
-            f.write("<table>")
-            if data and isinstance(data[0], dict):
-                f.write("<tr>")
-                for header in data[0].keys():
-                    f.write(f"<th>{header}</th>")
-                f.write("</tr>")
-                for row in data:
-                    f.write("<tr>")
-                    for cell in row.values():
-                        f.write(f"<td>{cell}</td>")
-                    f.write("</tr>")
+
+            for status_code, url in data:
+                f.write(f"<tr><td>{status_code}</td><td>{url}</td></tr>\n")
+
             f.write("</table></body></html>")
 
     @staticmethod
     def _log_md(file_path: str, data: list):
         with open(file_path, "w", encoding="utf-8") as f:
-            if data and isinstance(data[0], dict):
-                headers = " | ".join(data[0].keys())
-                f.write(f"| {headers} |\n")
-                f.write(f"| {' | '.join(['---'] * len(data[0]))} |\n")
-                for row in data:
-                    f.write(f"| {' | '.join(map(str, row.values()))} |\n")
+            f.write("# Log Data\n\n")  
+            f.write("| Status Code | URL |\n")
+            f.write("|------------|-----|\n")
+            for status_code, url in data:
+                f.write(f"| {status_code} | {url} |\n")
 
     @staticmethod
     def _log_xml(file_path: str, data: list):
         root = ET.Element("logs")
-        for item in data:
+        
+        for status_code, url in data:
             entry = ET.SubElement(root, "entry")
-            for key, value in item.items():
-                ET.SubElement(entry, key).text = str(value)
+            ET.SubElement(entry, "status_code").text = str(status_code)
+            ET.SubElement(entry, "url").text = url
+
         tree = ET.ElementTree(root)
         tree.write(file_path, encoding="utf-8", xml_declaration=True)
 
     @staticmethod
     def _log_yaml(file_path: str, data: list):
+        yaml_data = [{"status_code": status_code, "url": url} for status_code, url in data]
         with open(file_path, "w", encoding="utf-8") as f:
-            yaml.dump(data, f, allow_unicode=True, default_flow_style=False)
+            yaml.dump(yaml_data, f, allow_unicode=True, default_flow_style=False)
 
     @staticmethod
     def _log_xlsx(file_path: str, data: list):
-        df = pd.DataFrame(data)
+        df = pd.DataFrame(data, columns=["status_code", "url"])
         df.to_excel(file_path, index=False)

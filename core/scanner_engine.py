@@ -1,24 +1,10 @@
-# -*- coding: utf-8 -*-
-#  psdir - Web Path Scanner
-#  Copyright (C) 2025 waibui
-#
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-#
-#  Author: waibui
-
 import sys
 import requests
 import threading
 import signal
 from queue import Queue
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from bs4 import BeautifulSoup
 
 from models.scan_config import ScannerConfig
 from views.logger import Logger
@@ -26,9 +12,8 @@ from core.utilities import Utilities
 from core.requests import request
 
 class ScannerEngine:
-   
+    
     def __init__(self, configs: ScannerConfig, wordlist: Queue, user_agent: list):
-   
         self.configs = configs
         self.wordlist = wordlist
         self.user_agent = user_agent
@@ -43,7 +28,6 @@ class ScannerEngine:
         sys.exit(1)
 
     def scan(self):
-      
         try:
             with ThreadPoolExecutor(max_workers=self.configs.threads) as executor:
                 futures = {executor.submit(self.worker, path): path for path in list(self.wordlist.queue)}
@@ -59,8 +43,7 @@ class ScannerEngine:
                         Logger.error(f"[!] Worker error: {e}")
 
             if self.configs.output and not self.stop_event.is_set():
-                Logger.logging_to_file(self.configs.output, self.results)
-        
+                self.save_results()
         except (KeyboardInterrupt, SystemExit):
             self.stop_event.set()
             Logger.info("[!] Stopping all workers...")
@@ -82,9 +65,40 @@ class ScannerEngine:
                 user_agent=Utilities.random_user_agent(self.user_agent)
             )
             if result and not self.stop_event.is_set():
-                Logger.result_scan(result[0],result[1])
+                Logger.result_scan(*result)
+                self.extract_and_scan_links(result[1])  # Extract and scan links from the response URL
                 return result
         except Exception as e:
             if not self.stop_event.is_set():
                 Logger.error(f"[!] Error scanning {path}: {e}")
         return None
+
+    def extract_and_scan_links(self, url):
+        try:
+            response = self.session.get(url, timeout=self.configs.timeout)
+            if response.status_code != 200:
+                return
+            
+            soup = BeautifulSoup(response.text, 'html.parser')
+            links = [a.get('href') for a in soup.find_all('a', href=True)]
+            
+            for link in links:
+                if not link.startswith(('http://', 'https://')):
+                    link = f"{self.configs.url.rstrip('/')}/{link.lstrip('/')}"
+                
+                link_status = self.check_link_status(link)
+                if link_status:
+                    Logger.result_scan(link_status, link)
+        except Exception as e:
+            Logger.error(f"[!] Error extracting links from {url}: {e}")
+
+    def check_link_status(self, link):
+        try:
+            response = self.session.get(link, timeout=self.configs.timeout, allow_redirects=self.configs.allow_redirect)
+            return response.status_code
+        except requests.RequestException:
+            return None
+
+    def save_results(self):
+        for file_path in map(str.strip, self.configs.output.split(",")):
+            Logger.logging_to_file(file_path, self.results)
