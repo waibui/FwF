@@ -25,10 +25,10 @@ sys.dont_write_bytecode = True
 from core.dependencies import install_dependencies
 install_dependencies()
 
-from parse.parse_cmd import parse_args
+from parses.command_parser import parse_args
 from models.option import Option
-from controllers.controller import Controller
-from views.logging import Logging
+from controllers.scan_controller import Controller
+from views.logger import Logging
 from core.setting import DEFAULT_METHOD, USAGE
 
 def main():
@@ -41,6 +41,7 @@ def main():
             Logging.error(f"No URL provided. Please specify a valid URL.\n{USAGE}")
             sys.exit(1)
 
+        options.http_method = options.http_method.upper()
         if options.http_method not in DEFAULT_METHOD:
             Logging.error(f"Invalid HTTP method '{options.http_method}'. Allowed methods: {DEFAULT_METHOD}")
             sys.exit(1)

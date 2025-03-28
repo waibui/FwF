@@ -19,7 +19,7 @@ import yaml
 import xml.etree.ElementTree as ET
 import pandas as pd
 
-class FileLogging:
+class FileLogger:
     """
     A class for logging data into files based on their extensions.
     
@@ -79,7 +79,7 @@ class FileLogging:
         with open(file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             if data and isinstance(data[0], dict):
-                writer.writerow(data[0].keys())  # Write headers
+                writer.writerow(data[0].keys())  
                 for row in data:
                     writer.writerow(row.values())
             else:

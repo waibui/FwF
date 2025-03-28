@@ -22,7 +22,7 @@ from queue import Queue
 from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
 from models.option import Option
-from views.logging import Logging
+from views.logger import Logger
 from controllers.scan import scan
 
 from core.setting import DEFAULT_STATUS
@@ -82,7 +82,7 @@ class Controller:
             executor.shutdown(wait=True) 
             
             if self.option.output_file is not None:
-                Logging.logging_to_file(self.option.output_file, self.results)
+                Logger.logging_to_file(self.option.output_file, self.results)
                 
         except KeyboardInterrupt:
             print("\n[!] Keyboard Interrupt detected! Stopping all threads...")
@@ -111,7 +111,7 @@ class Controller:
             proxy=self.proxies,
         )
         if result:
-            Logging.result(result['status'], result['url'])
+            Logger.result(result['status'], result['url'])
             self.results.append(result)
         self.wordlist_queue.task_done()
 
@@ -161,7 +161,7 @@ class Controller:
             with open(self.option.user_agent, "r") as f:
                 self.user_agents = f.read().splitlines()
         except FileNotFoundError:
-            Logging.error(f"Invalid user-agent path '{self.option.user_agent}'")
+            Logger.error(f"Invalid user-agent path '{self.option.user_agent}'")
             sys.exit(1)
 
     def fetch_wordlist(self):
@@ -177,7 +177,7 @@ class Controller:
                 for word in words:
                     self.wordlist_queue.put(word)
         except FileNotFoundError:
-            Logging.error(f"Invalid wordlist path '{self.option.wordlists}'")
+            Logger.error(f"Invalid wordlist path '{self.option.wordlists}'")
             sys.exit(1)
 
     def parse_key_value_string(self, input_string):
@@ -224,7 +224,7 @@ class Controller:
         requested_statuses = set(self.option.match_code.split(",")) 
 
         if not requested_statuses.issubset(valid_statuses): 
-            Logging.error(f"Invalid status code '{self.option.match_code}'")
+            Logger.error(f"Invalid status code '{self.option.match_code}'")
             sys.exit(1)
 
     def random_user_agent(self):

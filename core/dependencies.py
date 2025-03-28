@@ -17,7 +17,7 @@ import sys
 import subprocess
 import pkg_resources
 
-REQUIREMENTS_FILE = "requirements.txt"
+from core.config import Config
 
 def get_dependencies() -> list[str]:
     """
@@ -30,7 +30,7 @@ def get_dependencies() -> list[str]:
         SystemExit: If the requirements.txt file is not found.
     """
     try:
-        with open(REQUIREMENTS_FILE, "r", encoding="utf-8") as f:
+        with open(Config.REQUIREMENTS, "r", encoding="utf-8") as f:
             return [line.strip() for line in f if line.strip() and not line.startswith("#")]
     except FileNotFoundError:
         print("Can't find requirements.txt")
