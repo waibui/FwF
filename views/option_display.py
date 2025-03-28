@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #  psdir - Web Path Scanner
 #  Copyright (C) 2025 waibui
-#
+#  
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 2 of the License, or
@@ -13,12 +13,11 @@
 #
 #  Author: waibui
 
-import os
+from dataclasses import fields
 
-def is_valid_file(file_path: str) -> bool:
-    """Check if a file exists and is readable."""
-    return os.path.isfile(file_path) and os.access(file_path, os.R_OK)
-
-def is_valid_url(url: str) -> bool:
-    """Basic URL validation."""
-    return isinstance(url, str) and url.startswith(("http://", "https://"))
+def print_option(config):
+    print('-'*60)
+    for field in fields(config):
+        print(f"{field.name.ljust(24)}: {getattr(config, field.name)}")
+    print('-'*60)
+        

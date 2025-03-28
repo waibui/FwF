@@ -13,47 +13,28 @@
 #
 #  Author: waibui
 
-#=================================#
-#      dont create pycache        #   
-#=================================#
-import sys
-sys.dont_write_bytecode = True
-
-#=================================#
-#       check dependencies        #   
-#=================================#
-from core.dependencies import install_dependencies
-install_dependencies()
-
-from parses.command_parser import parse_args
-from models.option import Option
-from controllers.scan_controller import Controller
-from views.logger import Logging
-from core.setting import DEFAULT_METHOD, USAGE
-
+try:
+    import sys
+    sys.dont_write_bytecode = True
+    
+    from core.dependencies import install_dependencies
+    from parses.command_parser import parse_args
+    install_dependencies()
+    
+    from controllers.scan_controller import Controller
+    
+except KeyboardInterrupt:
+    errMsg = "[!] Keyboard Interrupt detected!"
+    sys.exit(errMsg)
+    
 def main():
-    """Main function to run the Web Path Scanner."""
-    try:
-        parser = parse_args()
-        options = Option(parser)
-
-        if not options.url:
-            Logging.error(f"No URL provided. Please specify a valid URL.\n{USAGE}")
-            sys.exit(1)
-
-        options.http_method = options.http_method.upper()
-        if options.http_method not in DEFAULT_METHOD:
-            Logging.error(f"Invalid HTTP method '{options.http_method}'. Allowed methods: {DEFAULT_METHOD}")
-            sys.exit(1)
-
-        Controller(option=options).run()
-
-    except KeyboardInterrupt:
-        sys.exit(0)
-
-    except Exception as e:
-        Logging.error(f"Unexpected error: {e}")
-        sys.exit(1)
-
+    args = parse_args()
+    
+    controller = Controller(args)   
+    controller.run()
+    
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass

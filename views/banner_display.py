@@ -15,12 +15,12 @@
 
 import platform
 import sys
-from core.setting import VERSION
+from core.config import Config
 from views.banner import BANNER
 
 def print_banner(
     author: str = 'waibui',
-    version: str = VERSION,
+    version: str = Config.VERSION,
     document: str = "https://github.com/waibui/psdir",
     license: str = "LICECSE",
     verbose: bool = True

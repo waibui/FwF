@@ -36,7 +36,7 @@ def create_parser() -> argparse.ArgumentParser:
     parser.add_argument("-w", "--wordlists", default=Config.DEFAULT_WORDLIST, help="Path to wordlist file(s)")
     parser.add_argument("-ua", "--user-agent", default=Config.DEFAULT_USER_AGENT, help="User-Agent string")
     parser.add_argument("-t", "--threads", type=positive_threads, default=Config.DEFAULT_THREAD, help="Number of threads")
-    parser.add_argument("--timeout", type=positive_timeout, default=Config.DEFAULT_TIMEOUT, help="Connection timeout in seconds")
+    parser.add_argument("-to", "--timeout", type=positive_timeout, default=Config.DEFAULT_TIMEOUT, help="Connection timeout in seconds")
 
     # === HTTP Settings ===
     parser.add_argument("-m", "--http-method", type=valid_http_method, default="GET", help="HTTP method")

@@ -46,7 +46,7 @@ class Logger:
         _base_logging_console('Critical', message)
         
     @classmethod
-    def data(cls, statuscode, message):
+    def result_scan(cls, statuscode, message):
         """Logs a result message with a custom status code."""
         _base_logging_console(statuscode, message)
         

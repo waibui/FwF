@@ -34,7 +34,6 @@ class ScannerConfig:
         allow_redirect (bool): Whether to allow HTTP redirects.
         output (Optional[str]): File path to save the scan results, if specified.
     """
-    
     url: str
     wordlists: str
     user_agent: str
