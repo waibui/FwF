@@ -45,3 +45,4 @@ class ScannerConfig:
     proxies: Optional[str]
     allow_redirect: bool
     output: Optional[str]
+    scrape: bool

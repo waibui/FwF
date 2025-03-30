@@ -32,6 +32,7 @@ class Config:
     DEFAULT_STATUS = [200, 204, 301, 302, 307, 401, 403]
     DEFAULT_METHOD = ["GET", "POST", "HEAD", "PUT", "DELETE"]
     ALLOW_REDIRECT = True
+    ALLOW_SCRAPE = False
     
     # Application directory
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))

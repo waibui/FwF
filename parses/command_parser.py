@@ -47,6 +47,9 @@ def create_parser() -> argparse.ArgumentParser:
 
     # === Output Settings ===
     parser.add_argument("-o", "--output", type=valid_output, help="Save output to a file (.txt, .log, .json)")
+    
+    # === Scrape Mode  ===
+    parser.add_argument("-s", "--scrape", type=str2bool, default=Config.ALLOW_SCRAPE, help="Scrape <a> tags and request their URLs")
 
     return parser
 
@@ -67,4 +70,5 @@ def parse_args() -> ScannerConfig:
         proxies=args.proxies,
         allow_redirect=args.allow_redirect,
         output=args.output,
+        scrape=args.scrape
     )
