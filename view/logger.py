@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #  psdir - Web Path Scanner
 #  Copyright (C) 2025 waibui
-#  
+#
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 2 of the License, or
@@ -13,9 +13,21 @@
 #
 #  Author: waibui
 
-import random
+import logging
 
-class Utilities:
-    @classmethod
-    def random_user_agent(cls, list: list):
-        return random.choice(list) if list else "Mozilla/5.0"
+class CustomFormatter(logging.Formatter):
+    def format(self, record):
+        if record.levelno == logging.INFO:
+            return record.getMessage()  
+        return f"{record.levelname} - {record.getMessage()}" 
+
+logger = logging.getLogger("AppLogger")
+logger.setLevel(logging.DEBUG) 
+
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(CustomFormatter())
+
+if logger.hasHandlers():
+    logger.handlers.clear()
+
+logger.addHandler(console_handler)

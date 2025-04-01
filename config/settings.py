@@ -15,8 +15,7 @@
 
 import os
 
-class Config:
-    """Main config for Tool"""
+class Setting:
     
     # General settings
     APP_NAME = "psdir"
@@ -29,7 +28,7 @@ class Config:
     # Scan settings
     DEFAULT_TIMEOUT = 10
     DEFAULT_THREAD = 50
-    DEFAULT_STATUS = [200, 204, 301, 302, 307, 401, 403]
+    DEFAULT_STATUS = [200, 204, 301, 302, 307, 401, 403, 429]
     DEFAULT_METHOD = ["GET", "POST", "HEAD", "PUT", "DELETE"]
     ALLOW_REDIRECT = True
     ALLOW_SCRAPE = False
@@ -38,8 +37,8 @@ class Config:
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     
     # Wordlist & User-Agent configuration
-    DEFAULT_WORDLIST = os.path.join(BASE_DIR, "static", "wordlists", "wordlist.txt")
-    DEFAULT_USER_AGENT = os.path.join(BASE_DIR, "static", "wordlists", "user-agent.txt")
+    DEFAULT_WORDLIST = os.path.join(BASE_DIR, "data", "wordlist.txt")
+    DEFAULT_USER_AGENT = os.path.join(BASE_DIR, "data", "user-agent.txt")
     
     # Requirement file
     REQUIREMENTS = os.path.join(BASE_DIR, "requirements.txt")
@@ -53,6 +52,9 @@ class Config:
     ██║     ███████║██████╔╝██║██║  ██║  %s
     ╚═╝     ╚══════╝╚═════╝ ╚═╝╚═╝  ╚═╝  %s                                                                         
     '''
+    
+    # Separator
+    SEPARATOR = "-" * 60
 
     
     

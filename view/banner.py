@@ -15,12 +15,11 @@
 
 import platform
 import sys
-from core.config import Config
-from views.banner import BANNER
+from config.settings import Setting
 
 def print_banner(
     author: str = 'waibui',
-    version: str = Config.VERSION,
+    version: str = Setting.VERSION,
     document: str = "https://github.com/waibui/psdir",
     license: str = "LICECSE",
     verbose: bool = True
@@ -44,7 +43,7 @@ def print_banner(
     python_version = sys.version.split()[0]  
 
     if verbose:
-        print(BANNER % (
+        print(Setting.BANNER % (
             f"Author    : {author}",
             f"Version   : {version}",
             f"License   : {license}",
@@ -53,4 +52,4 @@ def print_banner(
             f"Python    : {python_version}"
         ))
     else:
-        print(BANNER % ('', '', '', '', '', ''))
+        print(Setting.BANNER % ('', '', '', '', '', ''))

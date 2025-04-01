@@ -17,12 +17,19 @@ try:
     import sys
     sys.dont_write_bytecode = True
     
-    from core.dependencies import install_dependencies
-    from parses.command_parser import parse_args
-    install_dependencies()
+    from view.logger import logger
     
-    from controllers.scan_controller import Controller
+    from utils.arg_parser import parse_args
+    from utils.dependencies import install_dependencies
     
+    try:
+        install_dependencies()
+    except Exception as e:
+        logger.error(e)        
+        sys.exit(1)
+        
+    from controller.controller import Controller
+            
 except KeyboardInterrupt:
     errMsg = "[!] Keyboard Interrupt detected!"
     sys.exit(errMsg)
@@ -36,5 +43,8 @@ def main():
 if __name__ == "__main__":
     try:
         main()
+        
     except KeyboardInterrupt:
-        pass
+        logger.info("user interrupt")
+    except Exception as e:
+        logger.error(e)

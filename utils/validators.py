@@ -16,7 +16,7 @@
 import re
 import argparse
 from typing import List
-from core.config import Config 
+from config.settings import Setting
 
 # ========== URL & REQUEST VALIDATORS ==========
 def is_valid_url(value: str) -> str:
@@ -29,8 +29,8 @@ def is_valid_url(value: str) -> str:
 def valid_http_method(value: str) -> str:
     """Validate the HTTP method."""
     method = value.upper()
-    if method not in Config.DEFAULT_METHOD:
-        raise argparse.ArgumentTypeError(f"Invalid HTTP method '{method}'. Allowed: {Config.DEFAULT_METHOD}.")
+    if method not in Setting.DEFAULT_METHOD:
+        raise argparse.ArgumentTypeError(f"Invalid HTTP method '{method}'. Allowed: {Setting.DEFAULT_METHOD}.")
     return method
 
 # ========== NUMERIC VALIDATORS ==========
@@ -65,8 +65,8 @@ def valid_proxy(value: str) -> str:
 
 def valid_output(value: str) -> str:
     """Validate the output file path format."""
-    if not value.endswith(tuple(Config.FILETYPE)):
-        raise argparse.ArgumentTypeError(f"Output file must have a valid extension ({', '.join(Config.FILETYPE)}).")
+    if not value.endswith(tuple(Setting.FILETYPE)):
+        raise argparse.ArgumentTypeError(f"Output file must have a valid extension ({', '.join(Setting.FILETYPE)}).")
     return value
 
 # ========== BOOLEAN & MATCH CODE VALIDATORS ==========
@@ -84,15 +84,15 @@ def str2bool(value: str) -> bool:
         raise argparse.ArgumentTypeError("Boolean value expected: 'true' or 'false'.")
 
 def valid_match_code(value: str) -> List[int]:
-    """Validate match HTTP status codes based on Config.DEFAULT_STATUS."""
+    """Validate match HTTP status codes based on Setting.DEFAULT_STATUS."""
     try:
         codes = [int(code.strip()) for code in value.split(",")]
     except ValueError:
         raise argparse.ArgumentTypeError("Match codes must be integers (comma-separated).")
 
-    invalid_codes = [code for code in codes if code not in Config.DEFAULT_STATUS]
+    invalid_codes = [code for code in codes if code not in Setting.DEFAULT_STATUS]
     if invalid_codes:
         raise argparse.ArgumentTypeError(
-            f"Invalid match codes: {invalid_codes}. Allowed values: {Config.DEFAULT_STATUS}."
+            f"Invalid match codes: {invalid_codes}. Allowed values: {Setting.DEFAULT_STATUS}."
         )
     return codes

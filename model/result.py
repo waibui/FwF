@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #  psdir - Web Path Scanner
 #  Copyright (C) 2025 waibui
-#  
+#
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 2 of the License, or
@@ -13,11 +13,10 @@
 #
 #  Author: waibui
 
-from dataclasses import fields
+from dataclasses import dataclass
 
-def print_option(config):
-    print('-'*60)
-    for field in fields(config):
-        print(f"{field.name.ljust(24)}: {getattr(config, field.name)}")
-    print('-'*60)
-        
+@dataclass
+class Result:
+    status_code: int
+    url: str
+    elapsed_time: float
