@@ -16,38 +16,38 @@
 
 ## Option
 ```
-Options:
-  --version             show program's version number and exit
+usage: psdir.py [-u|--url] target [options].
+
+psdir - Web Path Scanner
+
+options:
   -h, --help            show this help message and exit
-
-  CORE SETTINGS:
-    -u URL, --url=URL   Target URL, eg: https://example.com,
-                        http://example.com
-    -w WORDLISTS, --wordlists=WORDLISTS
-                        Wordlist files or directories contain wordlists
-    --ua=USER_AGENT, --user-agent=USER_AGENT
-                        User-Agent files or directories contain useragent
-
-  PERFORMENT & REQUEST SETTINGS:
-    -t THREADS, --threads=THREADS
-                        Number of threads (default: 40)
-    --to=TIMEOUT, --timeout=TIMEOUT
+  -u URL, --url URL     Target URL
+  -w WORDLIST, --wordlist WORDLIST
+                        Path to wordlist file(s)
+  -ua USER_AGENT, --user-agent USER_AGENT
+                        Path to user-agent file(s)
+  -c CONCURRENCY, --concurrency CONCURRENCY
+                        Number of threads
+  -t TIMEOUT, --timeout TIMEOUT
                         Connection timeout in seconds
-    -m METHOD, --http-method=METHOD
-                        HTTP method (default: GET)
-    --mc=MATCH_CODE, --match-code=MATCH_CODE
-                        Match HTTP status code
-                        (default:200,204,301,302,307,401,403)
-    --cookie=COOKIE     The cookie of the requests, eg: key:value
-    --proxies=PROXY     PROXY for requests, eg:
-                        https://username:password@proxy.example.com:8080,
-                        https://proxy.example.com:8080
-    --ar=ALLOW_REDIRECT, --allow-redirect=ALLOW_REDIRECT
-                        Accept redirect in request
+  -m HTTP_METHOD, --http-method HTTP_METHOD
+                        HTTP method
+  -mc MATCH_CODE, --match-code MATCH_CODE
+                        Match HTTP status codes
 
-  OUTPUT & LOGGING SETTINGS:
-    -o FILE, --output=FILE
-                        Save output to a file
+HTTP Settings:
+  --cookie COOKIE       Cookies for requests (e.g., 'key=value; key2=value2')
+  --proxies PROXIES     Proxy for requests (e.g., 'http://user:pass@proxy.com:8080')
+  -ar, --allow-redirect
+                        Allow HTTP redirects (true/false)
+  -s, --scrape          Scrape <a> tags and request their URLs
+  -rl RATE_LIMIT, --rate-limit RATE_LIMIT
+                        Limit requests per second (default: unlimited)
+
+Output Settings:
+  -o OUTPUT, --output OUTPUT
+                        Save output to a file (.txt, .log, .json)
 
 See 'core/setting.py' for the example configuration file
 ```
