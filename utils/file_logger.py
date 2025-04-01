@@ -18,9 +18,8 @@ class FileLogger:
         Logs data to a file based on its extension, including the executed command.
         """
         ext = cls._get_file_extension(file_path)
-        command = " ".join(sys.argv)  # Getting the executed command
+        command = " ".join(sys.argv) 
 
-        # Format the data to include timestamp and command
         formatted_data = cls._format_data(data, command)
 
         if ext == "json":
@@ -111,11 +110,9 @@ class FileLogger:
             <body>
             """)
 
-            # Write Timestamp & Command
             f.write(f"<h2>Log Timestamp</h2><p>{data[0]['timestamp']}</p>")
             f.write(f"<h2>Executed Command</h2><pre>{data[0]['command']}</pre>")
 
-            # Write Table
             f.write("<h2>Request Logs</h2>")
             f.write("<table><tr><th>Status Code</th><th>URL</th><th>Request Time (s)</th></tr>")
             for row in data[1:]:
