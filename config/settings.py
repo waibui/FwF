@@ -22,7 +22,7 @@ class Setting:
     VERSION = "1.0.0"
     USAGE = "psdir.py [-u|--url] target [options]."
     CHOOSE = "Choose -h/--help option for more detail."
-    EPILOG = "See 'core/setting.py' for the example configuration file"
+    EPILOG = "See 'config/settings.py' for the example configuration file"
     FILETYPE =[".txt", ".log", ".json", ".csv", ".xlsx", ".yaml", ".yml", ".md", ".html", ".xml"]
     
     # Scan settings

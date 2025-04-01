@@ -49,7 +49,7 @@ Output Settings:
   -o OUTPUT, --output OUTPUT
                         Save output to a file (.txt, .log, .json)
 
-See 'core/setting.py' for the example configuration file
+See 'config/settings.py' for the example configuration file
 ```
 ## Usage
 ```python3 psdir.py [-u|--url] target [options]```
