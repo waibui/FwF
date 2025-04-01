@@ -30,7 +30,7 @@ class Setting:
     DEFAULT_THREAD = 50
     DEFAULT_STATUS = [200, 204, 301, 302, 307, 401, 403, 429]
     DEFAULT_METHOD = ["GET", "POST", "HEAD", "PUT", "DELETE"]
-    ALLOW_REDIRECT = True
+    ALLOW_REDIRECT = False
     ALLOW_SCRAPE = False
     
     # Application directory

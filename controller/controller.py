@@ -28,21 +28,26 @@ class Controller:
     def __init__(self, args):
         self.args = args
         self.wordlist = get_file_content(self.args.wordlist)
-        self.user_agent = UserAgent()
+        self.user_agent = get_file_content(self.args.user_agent) if self.args.user_agent else UserAgent()
         self.results = []
         self.status_count = defaultdict(int)
 
     def run(self):
         print_banner()
         print_config(self.args, self.wordlist)
-        
-        start_time = time.time()
-        self.results = asyncio.run(
-            Scanner(self.args, self.wordlist, self.user_agent).scan()
-        )
-        total_time = time.time() - start_time
-        self.process_results()
-        print_results(total_time, self.results, self.status_count)
+
+        try:
+            start_time = time.time()
+            self.results = asyncio.run(
+                Scanner(self.args, self.wordlist, self.user_agent).scan()
+            )
+
+            total_time = time.time() - start_time
+            self.process_results()
+            print_results(total_time, self.results, self.status_count)
+
+        except KeyboardInterrupt:
+            print("[!] User interrupted. Exiting gracefully.")
 
     def process_results(self):
         for result in self.results:

@@ -17,12 +17,14 @@ import aiohttp
 import time
 from lxml import html
 from urllib.parse import urljoin, urlparse
+from utils.user_agent import random_user_agent
 from view.logger import logger
 from model.result import Result
 
-async def request(session, url, path, user_agent, args):
+async def request(session, path, user_agent, args):
     full_url = f"{args.url.rstrip('/')}/{path.lstrip('/')}"
-    headers = {"User-Agent": user_agent.random}
+    headers = {"User-Agent": random_user_agent(user_agent)}
+    
     kwargs = {
         "headers": headers,
         "timeout": aiohttp.ClientTimeout(total=args.timeout),

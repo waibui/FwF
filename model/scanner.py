@@ -16,7 +16,6 @@
 import asyncio
 import aiohttp
 from view.logger import logger
-
 from utils.request_handler import check_link_status, request
 
 class Scanner:
@@ -29,32 +28,45 @@ class Scanner:
         self.crawled_links = set()
         self.extracted_links = []
         self.link_results = []
+        self.rate_limiter = asyncio.Semaphore(self.rate_limit) if self.rate_limit else None
 
     async def scan(self):
-        connector = aiohttp.TCPConnector(limit=self.args.concurrency, enable_cleanup_closed=True)
-        async with aiohttp.ClientSession(connector=connector, trust_env=True) as session:
-            tasks = [self.worker(session, path) for path in self.wordlist]
-            results = await asyncio.gather(*tasks)
-            initial_results = [res for res in results if res]
+        try:
+            connector = aiohttp.TCPConnector(limit=self.args.concurrency, enable_cleanup_closed=True)
+            async with aiohttp.ClientSession(connector=connector, trust_env=True) as session:
+                tasks = [self.worker(session, path) for path in self.wordlist]
+                results = await asyncio.gather(*tasks, return_exceptions=True)  # Tránh lỗi không bắt Task exception
 
-            if self.extracted_links:
-                logger.info(f"[+] Checking status codes for {len(self.extracted_links)} extracted links...")
-                link_tasks = [check_link_status(session, link, self.user_agent, self.args) for link in self.extracted_links]
-                link_results = await asyncio.gather(*link_tasks)
-                initial_results.extend(link_results)
-            
-        return initial_results
+                results = [res for res in results if res and not isinstance(res, Exception)]
+
+                if self.extracted_links:
+                    logger.info(f"[+] Checking status codes for {len(self.extracted_links)} extracted links...")
+                    link_tasks = [check_link_status(session, link, self.user_agent, self.args) for link in self.extracted_links]
+                    link_results = await asyncio.gather(*link_tasks, return_exceptions=True)
+                    results.extend([res for res in link_results if res and not isinstance(res, Exception)])
+
+            return results
+
+        except asyncio.CancelledError:
+            logger.info("[!] Scan was cancelled. Cleaning up...")
+            return []
+
+        except KeyboardInterrupt:
+            logger.info("[!] User interrupted. Exiting gracefully.")
+            return []
 
     async def worker(self, session, path):
         async with self.semaphore:
+            if self.rate_limiter:
+                async with self.rate_limiter:
+                    await asyncio.sleep(1 / self.rate_limit)  
+            
             try:
-                result, links = await request(session, self.args.url, path, self.user_agent, self.args)
+                result, links = await request(session, path, self.user_agent, self.args)
+
                 if links:
                     self.extracted_links.extend(links)
-                    
-                if self.rate_limit and self.rate_limit > 1:
-                    await asyncio.sleep(1 / self.rate_limit)
-                    
+
                 return result
             except Exception as e:
                 logger.debug(f"Error in worker: {str(e)}")

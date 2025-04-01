@@ -48,6 +48,13 @@ def positive_threads(value: str) -> int:
         raise argparse.ArgumentTypeError("Thread count must be at least 1.")
     return threads
 
+def positive_rate_limit(value: str) -> int:
+    """Ensure thread count is at least 1."""
+    threads = int(value)
+    if threads < 1:
+        raise argparse.ArgumentTypeError("Rate limit must be at least 1.")
+    return threads
+
 # ========== FORMAT VALIDATORS ==========
 def valid_cookie(value: str) -> str:
     """Validate the cookie format (key=value; key2=value2)."""

@@ -16,7 +16,7 @@
 import argparse
 from config.settings import Setting
 from utils.validators import (
-    is_valid_url, positive_timeout, positive_threads, valid_http_method, 
+    is_valid_url, positive_timeout, positive_threads, positive_rate_limit, valid_http_method, 
     valid_cookie, valid_proxy, valid_output, str2bool, valid_match_code
 )
 
@@ -28,29 +28,25 @@ def parse_args() -> argparse.ArgumentParser:
         description="psdir - Web Path Scanner",
     )
 
-    # === Required Arguments ===
+    # General settings
     parser.add_argument("-u", "--url", required=True, type=is_valid_url, help="Target URL")
-
-    # === Optional Arguments ===
     parser.add_argument("-w", "--wordlist", default=Setting.DEFAULT_WORDLIST, help="Path to wordlist file(s)")
-    parser.add_argument("-ua", "--user-agent", default=Setting.DEFAULT_USER_AGENT, help="User-Agent string")
+    parser.add_argument("-ua", "--user-agent", help="User-Agent string")
     parser.add_argument("-c", "--concurrency", type=positive_threads, default=Setting.DEFAULT_THREAD, help="Number of threads")
     parser.add_argument("-t", "--timeout", type=positive_timeout, default=Setting.DEFAULT_TIMEOUT, help="Connection timeout in seconds")
-
-    # === HTTP Settings ===
     parser.add_argument("-m", "--http-method", type=valid_http_method, default="GET", help="HTTP method")
     parser.add_argument("-mc", "--match-code", type=valid_match_code, default=Setting.DEFAULT_STATUS, help="Match HTTP status codes")
-    parser.add_argument("--cookie", type=valid_cookie, help="Cookies for requests (e.g., 'key=value; key2=value2')")
-    parser.add_argument("--proxies", type=valid_proxy, help="Proxy for requests (e.g., 'http://user:pass@proxy.com:8080')")
-    parser.add_argument("-ar", "--allow-redirect", type=str2bool, default=Setting.ALLOW_REDIRECT, help="Allow HTTP redirects (true/false)")
 
-    # === Output Settings ===
-    parser.add_argument("-o", "--output", type=valid_output, help="Save output to a file (.txt, .log, .json)")
-    
-    # === Scrape Mode  ===
-    parser.add_argument("-s", "--scrape", type=str2bool, default=Setting.ALLOW_SCRAPE, help="Scrape <a> tags and request their URLs")
+    # Optional HTTP configurations
+    http_group = parser.add_argument_group("HTTP Settings")
+    http_group.add_argument("--cookie", type=valid_cookie, help="Cookies for requests (e.g., 'key=value; key2=value2')")
+    http_group.add_argument("--proxies", type=valid_proxy, help="Proxy for requests (e.g., 'http://user:pass@proxy.com:8080')")
+    http_group.add_argument("-ar", "--allow-redirect", action="store_true", default=Setting.ALLOW_REDIRECT, help="Allow HTTP redirects (true/false)")
+    http_group.add_argument("-s", "--scrape", action="store_true", default=Setting.ALLOW_SCRAPE, help="Scrape <a> tags and request their URLs")
+    http_group.add_argument("-rl","--rate-limit", type=positive_rate_limit, help="Limit requests per second (default: unlimited)")
 
-    parser.add_argument("--rate-limit", type=int, help="Limit requests per second (default: unlimited)")
-    
+    # Output options
+    output_group = parser.add_argument_group("Output Settings")
+    output_group.add_argument("-o", "--output", type=valid_output, help="Save output to a file (.txt, .log, .json)")
+
     return parser.parse_args()
-
