@@ -34,8 +34,8 @@ def parse_args() -> argparse.ArgumentParser:
     # === Optional Arguments ===
     parser.add_argument("-w", "--wordlist", default=Setting.DEFAULT_WORDLIST, help="Path to wordlist file(s)")
     parser.add_argument("-ua", "--user-agent", default=Setting.DEFAULT_USER_AGENT, help="User-Agent string")
-    parser.add_argument("-t", "--threads", type=positive_threads, default=Setting.DEFAULT_THREAD, help="Number of threads")
-    parser.add_argument("-to", "--timeout", type=positive_timeout, default=Setting.DEFAULT_TIMEOUT, help="Connection timeout in seconds")
+    parser.add_argument("-c", "--concurrency", type=positive_threads, default=Setting.DEFAULT_THREAD, help="Number of threads")
+    parser.add_argument("-t", "--timeout", type=positive_timeout, default=Setting.DEFAULT_TIMEOUT, help="Connection timeout in seconds")
 
     # === HTTP Settings ===
     parser.add_argument("-m", "--http-method", type=valid_http_method, default="GET", help="HTTP method")
@@ -50,5 +50,7 @@ def parse_args() -> argparse.ArgumentParser:
     # === Scrape Mode  ===
     parser.add_argument("-s", "--scrape", type=str2bool, default=Setting.ALLOW_SCRAPE, help="Scrape <a> tags and request their URLs")
 
+    parser.add_argument("--rate-limit", type=int, help="Limit requests per second (default: unlimited)")
+    
     return parser.parse_args()
 

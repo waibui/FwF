@@ -27,7 +27,7 @@ def print_config(args, wordlist):
     """
     print(Setting.SEPARATOR)
     print(f"- Target URL: {args.url}")
-    print(f"- Threads: {args.threads}")
+    print(f"- Threads: {args.concurrency}")
     print(f"- Timeout: {args.timeout} seconds")
     print(f"- Allow Redirects: {'Yes' if args.allow_redirect else 'No'}")
     print(f"- Cookie: {args.cookie if args.cookie else 'None'}")

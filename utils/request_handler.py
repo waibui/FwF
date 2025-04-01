@@ -15,42 +15,106 @@
 
 import aiohttp
 import time
-
+from lxml import html
+from urllib.parse import urljoin, urlparse
 from view.logger import logger
 from model.result import Result
-from utils.scrape import extract_links
 
-async def request(args, session, path, user_agent):
-    url = f"{args.url.rstrip('/')}/{path.lstrip('/')}"
+async def request(session, url, path, user_agent, args):
+    full_url = f"{args.url.rstrip('/')}/{path.lstrip('/')}"
     headers = {"User-Agent": user_agent.random}
     kwargs = {
         "headers": headers,
         "timeout": aiohttp.ClientTimeout(total=args.timeout),
         "allow_redirects": args.allow_redirect
     }
-    
+
     if args.cookie:
         kwargs["cookies"] = args.cookie
     if args.proxies:
         kwargs["proxy"] = args.proxies
-        
+
     start_time = time.time()
-    try:
-        async with session.get(url, **kwargs) as response:
+    try:    
+        async with session.get(full_url, **kwargs) as response:
             elapsed_time = time.time() - start_time  
-            
+
             result = None
             if response.status in args.match_code:
-                logger.info(f"[+] {response.status} - {elapsed_time:.3f}s - {url}")
-                result = Result(response.status, url, elapsed_time, None)
+                logger.info(f"[+] {response.status} - {elapsed_time:.3f}s - {full_url}")
+                result = Result(response.status, full_url, elapsed_time)
                 
                 if args.scrape and response.status == 200:
                     content = await response.text()
-                    links = extract_links(url, content)
-                    result.links = links
-                return result
+                    links = extract_links(full_url, content, args)
+                    return result, links
+            return result, []
     except aiohttp.ClientError:
         pass
     except Exception as e:
         pass
+    return None, []
+
+def extract_links(base_url, html_content, args):
+    crawled_links = set()
+    extracted_links = []
+    try:
+        if not html_content.strip():
+            return []
+
+        if isinstance(html_content, str):
+            html_content = html_content.encode('utf-8')
+
+        tree = html.fromstring(html_content)
+        links = []
+
+        for link in tree.xpath('//a[@href]'):
+            href = link.get('href')
+            if href:
+                absolute_url = urljoin(base_url, href)
+                if (absolute_url not in crawled_links and 
+                    not href.startswith('#') and 
+                    not href.startswith('javascript:') and
+                    not href.startswith('mailto:') and
+                    not href.startswith('tel:')):
+
+                    base_domain = urlparse(args.url).netloc
+                    link_domain = urlparse(absolute_url).netloc
+
+                    if base_domain == link_domain:
+                        links.append(absolute_url)
+                        crawled_links.add(absolute_url)
+                        extracted_links.append(absolute_url)
+
+        return links
+    except Exception as e:
+        return []
+
+async def check_link_status(session, url, user_agent, args):
+    headers = {"User-Agent": user_agent.random}
+    kwargs = {
+        "headers": headers,
+        "timeout": aiohttp.ClientTimeout(total=args.timeout),
+        "allow_redirects": args.allow_redirect
+    }
+
+    if args.cookie:
+        kwargs["cookies"] = args.cookie
+    if args.proxies:
+        kwargs["proxy"] = args.proxies
+
+    start_time = time.time()
+    try:
+        async with session.get(url, **kwargs) as response:
+            elapsed_time = time.time() - start_time
+            if response.status in args.match_code:
+                logger.info(f"[+] {response.status} - {elapsed_time:.3f}s - {url} (extracted link)")
+
+                result = Result(response.status, url, elapsed_time)
+                return result
+    except aiohttp.ClientError as e:
+        pass
+    except Exception as e:
+        pass
+
     return None
