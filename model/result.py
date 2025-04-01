@@ -17,6 +17,15 @@ from dataclasses import dataclass
 
 @dataclass
 class Result:
+    """
+    Represents the result of an HTTP request.
+
+    Attributes:
+        status_code (int): The HTTP status code.
+        url (str): The requested URL.
+        elapsed_time (float): The time taken for the request in seconds.
+    """
     status_code: int
     url: str
     elapsed_time: float
+    links: list[str]
