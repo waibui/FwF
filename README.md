@@ -54,7 +54,7 @@ See 'config/settings.py' for the example configuration file
 ## Usage
 ```python3 psdir.py [-u|--url] target [options]```
 
-* Recommend using **Virtual Enviroment**(*venv*) to avoid library conflict.
+Recommend using **Virtual Enviroment**(*venv*) to avoid library conflict.
 
 ---
 [More infomation...](https://waibui.github.io/2025/03/psdir-web-path-scan-tool/)
