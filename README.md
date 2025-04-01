@@ -53,3 +53,6 @@ See 'core/setting.py' for the example configuration file
 ```
 ## Usage
 ```python3 psdir.py [-u|--url] target [options]```
+
+---
+[More infomation...](https://waibui.github.io/2025/03/psdir-web-path-scan-tool/)
