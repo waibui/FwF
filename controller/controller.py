@@ -40,13 +40,15 @@ class Controller:
         self.results = asyncio.run(
             Scanner(self.args, self.wordlist, self.user_agent).scan()
         )
+        print(len(self.results))
         total_time = time.time() - start_time
-
         self.process_results()
         print_results(total_time, self.results, self.status_count)
 
     def process_results(self):
         for result in self.results:
-            self.status_count[result.status_code] += 1
+            if result: 
+                self.status_count[result.status_code] += 1
+
 
 

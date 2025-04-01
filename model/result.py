@@ -28,4 +28,3 @@ class Result:
     status_code: int
     url: str
     elapsed_time: float
-    links: list[str]
