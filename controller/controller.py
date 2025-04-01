@@ -23,6 +23,7 @@ from view.banner import print_banner
 from view.config import print_config
 from view.result import print_results
 from model.scanner import Scanner
+from utils.logger import Logger
 
 class Controller:
     def __init__(self, args):
@@ -45,6 +46,9 @@ class Controller:
             total_time = time.time() - start_time
             self.process_results()
             print_results(total_time, self.results, self.status_count)
+            
+            if self.args.output:
+                Logger.log_to_file(self.args.output)
 
         except KeyboardInterrupt:
             print("[!] User interrupted. Exiting gracefully.")

@@ -17,7 +17,7 @@ try:
     import sys
     sys.dont_write_bytecode = True
     
-    from view.logger import logger
+    from utils.logger import Logger
     
     from utils.arg_parser import parse_args
     from utils.dependencies import install_dependencies
@@ -25,7 +25,7 @@ try:
     try:
         install_dependencies()
     except Exception as e:
-        logger.error(e)        
+        Logger.error(e)        
         sys.exit(1)
         
     from controller.controller import Controller
@@ -45,6 +45,6 @@ if __name__ == "__main__":
         main()
         
     except KeyboardInterrupt:
-        logger.info("user interrupt")
+        Logger.info("user interrupt")
     except Exception as e:
-        logger.error(e)
+        Logger.error(e)

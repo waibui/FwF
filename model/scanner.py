@@ -15,7 +15,7 @@
 
 import asyncio
 import aiohttp
-from view.logger import logger
+from utils.logger import Logger
 from utils.request_handler import check_link_status, request
 
 class Scanner:
@@ -40,7 +40,7 @@ class Scanner:
                 results = [res for res in results if res and not isinstance(res, Exception)]
 
                 if self.extracted_links:
-                    logger.info(f"[+] Checking status codes for {len(self.extracted_links)} extracted links...")
+                    Logger.info(f"[+] Checking status codes for {len(self.extracted_links)} extracted links...")
                     link_tasks = [check_link_status(session, link, self.user_agent, self.args) for link in self.extracted_links]
                     link_results = await asyncio.gather(*link_tasks, return_exceptions=True)
                     results.extend([res for res in link_results if res and not isinstance(res, Exception)])
@@ -48,11 +48,11 @@ class Scanner:
             return results
 
         except asyncio.CancelledError:
-            logger.info("[!] Scan was cancelled. Cleaning up...")
+            Logger.info("[!] Scan was cancelled. Cleaning up...")
             return []
 
         except KeyboardInterrupt:
-            logger.info("[!] User interrupted. Exiting gracefully.")
+            Logger.info("[!] User interrupted. Exiting gracefully.")
             return []
 
     async def worker(self, session, path):
@@ -69,5 +69,5 @@ class Scanner:
 
                 return result
             except Exception as e:
-                logger.debug(f"Error in worker: {str(e)}")
+                Logger.debug(f"Error in worker: {str(e)}")
                 return None

@@ -18,7 +18,7 @@ import time
 from lxml import html
 from urllib.parse import urljoin, urlparse
 from utils.user_agent import random_user_agent
-from view.logger import logger
+from utils.logger import Logger
 from model.result import Result
 
 async def request(session, path, user_agent, args):
@@ -43,7 +43,7 @@ async def request(session, path, user_agent, args):
 
             result = None
             if response.status in args.match_code:
-                logger.info(f"[+] {response.status} - {elapsed_time:.3f}s - {full_url}")
+                Logger.info(f"[+] {response.status} - {elapsed_time:.3f}s - {full_url}")
                 result = Result(response.status, full_url, elapsed_time)
                 
                 if args.scrape and response.status == 200:
@@ -110,7 +110,7 @@ async def check_link_status(session, url, user_agent, args):
         async with session.get(url, **kwargs) as response:
             elapsed_time = time.time() - start_time
             if response.status in args.match_code:
-                logger.info(f"[+] {response.status} - {elapsed_time:.3f}s - {url} (extracted link)")
+                Logger.info(f"[+] {response.status} - {elapsed_time:.3f}s - {url} (extracted link)")
 
                 result = Result(response.status, url, elapsed_time)
                 return result
