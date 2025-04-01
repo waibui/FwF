@@ -67,7 +67,7 @@ class Scanner:
                 if links:
                     self.extracted_links.extend(links)
 
-                return result
+                return result 
             except Exception as e:
                 Logger.debug(f"Error in worker: {str(e)}")
                 return None

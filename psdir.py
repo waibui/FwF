@@ -17,23 +17,22 @@ try:
     import sys
     sys.dont_write_bytecode = True
     
-    from utils.logger import Logger
     
-    from utils.arg_parser import parse_args
     from utils.dependencies import install_dependencies
-    
+
     try:
         install_dependencies()
     except Exception as e:
-        Logger.error(e)        
-        sys.exit(1)
+        sys.exit(e)
         
     from controller.controller import Controller
+    from utils.logger import Logger
+    from utils.arg_parser import parse_args
             
 except KeyboardInterrupt:
     errMsg = "[!] Keyboard Interrupt detected!"
     sys.exit(errMsg)
-    
+
 def main():
     args = parse_args()
     

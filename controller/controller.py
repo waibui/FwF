@@ -42,13 +42,14 @@ class Controller:
             self.results = asyncio.run(
                 Scanner(self.args, self.wordlist, self.user_agent).scan()
             )
-
+       
             total_time = time.time() - start_time
             self.process_results()
             print_results(total_time, self.results, self.status_count)
             
             if self.args.output:
-                Logger.log_to_file(self.args.output)
+                for out in self.args.output.split(','):
+                    Logger.log_to_file(out, self.results)
 
         except KeyboardInterrupt:
             print("[!] User interrupted. Exiting gracefully.")

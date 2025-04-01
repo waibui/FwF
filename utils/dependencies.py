@@ -18,7 +18,6 @@ import subprocess
 import pkg_resources
 
 from config.settings import Setting
-from utils.logger import Logger
 from model.exception import DependencyError, RequirementsFileNotFoundError
 
 def install_dependencies():
@@ -34,7 +33,7 @@ def install_dependencies():
     missing_packages = check_dependencies()
     
     if missing_packages:
-        Logger.info(f"Installing missing packages: {', '.join(missing_packages)}")
+        print(f"Installing missing packages: {', '.join(missing_packages)}")
         try:
             subprocess.check_output(
                 [sys.executable, "-m", "pip", "install", *missing_packages],
@@ -81,7 +80,7 @@ def check_dependencies():
         except pkg_resources.DistributionNotFound:
             missing_packages.append(package)
         except pkg_resources.VersionConflict as e:
-            Logger.warning(f"Version conflict detected for {package}: {e}")
+            print(f"Version conflict detected for {package}: {e}")
             missing_packages.append(package)
             
     return missing_packages

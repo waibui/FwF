@@ -76,5 +76,5 @@ class Logger:
         cls.log(logging.DEBUG, message)
     
     @classmethod
-    def log_to_file(cls, file_path,message):
+    def log_to_file(cls, file_path, message):
         FileLogger.log(file_path, message)
