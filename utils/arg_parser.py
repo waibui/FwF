@@ -31,7 +31,7 @@ def parse_args() -> argparse.ArgumentParser:
     # General settings
     parser.add_argument("-u", "--url", required=True, type=is_valid_url, help="Target URL")
     parser.add_argument("-w", "--wordlist", default=Setting.DEFAULT_WORDLIST, help="Path to wordlist file(s)")
-    parser.add_argument("-ua", "--user-agent", help="User-Agent string")
+    parser.add_argument("-ua", "--user-agent", help="Path to user-agent file(s)")
     parser.add_argument("-c", "--concurrency", type=positive_threads, default=Setting.DEFAULT_THREAD, help="Number of threads")
     parser.add_argument("-t", "--timeout", type=positive_timeout, default=Setting.DEFAULT_TIMEOUT, help="Connection timeout in seconds")
     parser.add_argument("-m", "--http-method", type=valid_http_method, default="GET", help="HTTP method")

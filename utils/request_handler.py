@@ -93,7 +93,7 @@ def extract_links(base_url, html_content, args):
         return []
 
 async def check_link_status(session, url, user_agent, args):
-    headers = {"User-Agent": user_agent.random}
+    headers = {"User-Agent": random_user_agent(user_agent)}
     kwargs = {
         "headers": headers,
         "timeout": aiohttp.ClientTimeout(total=args.timeout),

@@ -35,7 +35,7 @@ class Scanner:
             connector = aiohttp.TCPConnector(limit=self.args.concurrency, enable_cleanup_closed=True)
             async with aiohttp.ClientSession(connector=connector, trust_env=True) as session:
                 tasks = [self.worker(session, path) for path in self.wordlist]
-                results = await asyncio.gather(*tasks, return_exceptions=True)  # Tránh lỗi không bắt Task exception
+                results = await asyncio.gather(*tasks, return_exceptions=True)  
 
                 results = [res for res in results if res and not isinstance(res, Exception)]
 
