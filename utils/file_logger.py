@@ -58,6 +58,8 @@ class FileLogger:
             cls._log_yaml(file_path, formatted_data)
         elif ext == "xlsx":
             cls._log_xlsx(file_path, formatted_data)
+        elif ext == "log":
+            cls._log_log(file_path, formatted_data)
         else:
             cls._log_txt(file_path, formatted_data)
 
@@ -87,6 +89,16 @@ class FileLogger:
                 f.write(str(line) + "\n")
 
     @staticmethod
+    def _log_log(file_path: str, data: list):
+        """
+        Logs data to a .log file (plain text format).
+        """
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(f"[{data[0]['timestamp']}] Executed Command: {data[0]['command']}\n")
+            for row in data[1:]:
+                f.write(f"[{row['status_code']}] {row['url']} ({row['elapsed_time']}s)\n")
+
+    @staticmethod
     def _log_json(file_path: str, data: list):
         """
         Logs data to a JSON file.
@@ -102,8 +114,7 @@ class FileLogger:
         with open(file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=["status_code", "url", "elapsed_time"])
             writer.writeheader()
-
-            for row in data[1:]: 
+            for row in data[1:]:
                 writer.writerow({
                     "status_code": row["status_code"],
                     "url": row["url"],
@@ -148,10 +159,8 @@ class FileLogger:
         """
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(f"{data[0]['timestamp']} \n ```{data[0]['command']}```\n\n")
-            
             f.write("| **Status Code** | **URL** | **Request Time (s)** |\n")
             f.write("| --- | --- | --- |\n")
-
             for row in data[1:]:
                 f.write(f"| {row['status_code']} | {row['url']} | {row['elapsed_time']} |\n")
 
