@@ -23,7 +23,7 @@
 import re
 import argparse
 from typing import List
-from config.settings import Setting
+from core.config import Setting
 
 # ========== URL & REQUEST VALIDATORS ==========
 def is_valid_url(value: str) -> str:

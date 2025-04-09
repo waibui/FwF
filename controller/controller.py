@@ -30,7 +30,7 @@ from view.banner import print_banner
 from view.config import print_config
 from view.result import print_results
 from model.scanner import Scanner
-from utils.logger import Logger
+from core.logger import Logger
 
 class Controller:
     def __init__(self, args):

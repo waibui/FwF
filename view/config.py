@@ -20,7 +20,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-from config.settings import Setting
+from core.config import Setting
 
 def print_config(args, wordlist):
     """Prints the scanning configuration based on the provided arguments and wordlist.

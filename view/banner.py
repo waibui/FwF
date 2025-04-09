@@ -22,7 +22,7 @@
 
 import platform
 import sys
-from config.settings import Setting
+from core.config import Setting
 
 def print_banner(
     author: str = 'waibui',

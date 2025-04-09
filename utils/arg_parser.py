@@ -21,7 +21,7 @@
 #  SOFTWARE.
 
 import argparse
-from config.settings import Setting
+from core.config import Setting
 from utils.validators import (
     is_valid_url, positive_timeout, positive_threads, positive_rate_limit, valid_http_method, 
     valid_cookie, valid_proxy, valid_output, str2bool, valid_match_code

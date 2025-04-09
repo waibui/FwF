@@ -22,7 +22,7 @@
 
 import asyncio
 import aiohttp
-from utils.logger import Logger
+from core.logger import Logger
 from utils.request_handler import check_link_status, request
 
 class Scanner:

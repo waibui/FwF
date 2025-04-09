@@ -24,7 +24,7 @@ import sys
 import subprocess
 import pkg_resources
 
-from config.settings import Setting
+from core.config import Setting
 from model.exception import DependencyError, RequirementsFileNotFoundError
 
 def install_dependencies():

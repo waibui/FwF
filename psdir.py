@@ -33,7 +33,7 @@ try:
         sys.exit(e)
         
     from controller.controller import Controller
-    from utils.logger import Logger
+    from core.logger import Logger
     from utils.arg_parser import parse_args
             
 except KeyboardInterrupt:

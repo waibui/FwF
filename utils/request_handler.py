@@ -25,7 +25,7 @@ import time
 from lxml import html
 from urllib.parse import urljoin, urlparse
 from utils.user_agent import random_user_agent
-from utils.logger import Logger
+from core.logger import Logger
 from model.result import Result
 
 async def request(session, path, user_agent, args):
