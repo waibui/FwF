@@ -147,6 +147,7 @@ async def check_link_status(session, url, user_agent, args):
         kwargs["cookies"] = args.cookie
     if args.proxies:
         kwargs["proxy"] = args.proxies
+        kwargs["ssl"] = False
 
     start_time = time.time()
     try:
