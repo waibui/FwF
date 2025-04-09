@@ -65,7 +65,7 @@ def positive_rate_limit(value: str) -> int:
 # ========== FORMAT VALIDATORS ==========
 def valid_cookie(value: str) -> str:
     """Validate the cookie format (key=value; key2=value2)."""
-    cookie_pattern = re.compile(r"^([\w-]+=[^;]+)(; [\w-]+=[^;]+)*$")
+    cookie_pattern = re.compile(r"^([\w-]+=[^;]+)(;[\w-]+=[^;]+)*$")
     if not cookie_pattern.match(value):
         raise argparse.ArgumentTypeError("Invalid cookie format. Use 'key=value; key2=value2'.")
     return value

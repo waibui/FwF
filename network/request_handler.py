@@ -25,6 +25,7 @@ import time
 from lxml import html
 from urllib.parse import urljoin, urlparse
 from utils.user_agent import random_user_agent
+from utils.cookie import parse_cookie
 from core.logger import Logger
 from core.result import Result
 
@@ -50,9 +51,8 @@ async def request(session, path, user_agent, args):
         "timeout": aiohttp.ClientTimeout(total=args.timeout),
         "allow_redirects": args.allow_redirect
     }
-
     if args.cookie:
-        kwargs["cookies"] = args.cookie
+        kwargs["cookies"] = parse_cookie(args.cookie)
     if args.proxies:
         kwargs["proxy"] = args.proxies
 

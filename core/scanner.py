@@ -21,7 +21,6 @@
 #  SOFTWARE.
 
 import asyncio
-
 import aiohttp
 
 from core.logger import Logger
