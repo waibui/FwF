@@ -24,6 +24,21 @@ from lxml import html
 from urllib.parse import urljoin, urlparse
 
 def extract_links(self, base_url, html_content):
+    """
+    Extract and normalize internal links from the given HTML content.
+
+    This method parses the HTML to find anchor (`<a>`) tags, filters out
+    unwanted links (e.g., fragments, JavaScript, mailto, tel), resolves
+    relative URLs to absolute ones, and stores internal links that haven't
+    been visited yet.
+
+    Args:
+        base_url (str): The base URL used to resolve relative links.
+        html_content (str or bytes): The HTML content from which to extract links.
+
+    Returns:
+        list[str]: A list of valid, unique internal links found in the HTML content.
+    """
     try:
         if not html_content.strip():
             return []

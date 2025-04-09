@@ -30,11 +30,19 @@ import pandas as pd
 from datetime import datetime
 from model.result import Result
 
+
 class Logger:
-    _instance = None 
+    """
+    Singleton Logger class for console and file logging in multiple formats.
+    """
+    _instance = None
 
     class CustomFormatter(logging.Formatter):
+        """
+        Custom log formatter to simplify log output depending on log level.
+        """
         def format(self, record):
+            """Format log message based on its severity level."""
             if record.levelno == logging.INFO:
                 return f"{record.getMessage()}"
             elif record.levelno == logging.WARNING:
@@ -46,12 +54,18 @@ class Logger:
             return f"{record.levelname} - {record.getMessage()}"
 
     def __new__(cls, log_file=None):
+        """
+        Create a single instance of Logger (singleton pattern).
+        """
         if cls._instance is None:
             cls._instance = super(Logger, cls).__new__(cls)
             cls._instance._initialize(log_file)
         return cls._instance
 
     def _initialize(self, log_file):
+        """
+        Set up logger handlers for console and optional file logging.
+        """
         self.logger = logging.getLogger("AppLogger")
         self.logger.setLevel(logging.DEBUG)
 
@@ -69,27 +83,45 @@ class Logger:
 
     @classmethod
     def log(cls, level, message):
+        """
+        Log a message with the specified logging level.
+        """
         instance = cls._instance or cls()
         instance.logger.log(level, message)
 
     @classmethod
     def info(cls, message):
+        """
+        Log an info-level message.
+        """
         cls.log(logging.INFO, message)
 
     @classmethod
     def warning(cls, message):
+        """
+        Log a warning-level message.
+        """
         cls.log(logging.WARNING, message)
 
     @classmethod
     def error(cls, message):
+        """
+        Log an error-level message.
+        """
         cls.log(logging.ERROR, message)
 
     @classmethod
     def debug(cls, message):
+        """
+        Log a debug-level message.
+        """
         cls.log(logging.DEBUG, message)
 
     @classmethod
     def log_to_file(cls, file_path: str, data: list[Result]):
+        """
+        Log result data to a file, formatted based on the file extension.
+        """
         ext = cls._get_file_extension(file_path)
         command = " ".join(sys.argv)
         formatted_data = cls._format_data(data, command)
@@ -115,21 +147,33 @@ class Logger:
 
     @staticmethod
     def _get_file_extension(file_path: str) -> str:
+        """
+        Extract and return the file extension from a file path.
+        """
         return file_path.rsplit(".", 1)[-1].lower() if "." in file_path else ""
 
     @staticmethod
     def _format_data(data: list, command: str) -> list:
+        """
+        Format the result data with timestamp and executed command.
+        """
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         return [{"timestamp": timestamp, "command": command}] + [vars(result) for result in data]
 
     @staticmethod
     def _log_txt(file_path: str, data: list):
+        """
+        Save logs to a plain text file.
+        """
         with open(file_path, "w", encoding="utf-8") as f:
             for line in data:
                 f.write(str(line) + "\n")
 
     @staticmethod
     def _log_log(file_path: str, data: list):
+        """
+        Save logs to a standard .log file format.
+        """
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(f"[{data[0]['timestamp']}] Executed Command: {data[0]['command']}\n")
             for row in data[1:]:
@@ -137,11 +181,17 @@ class Logger:
 
     @staticmethod
     def _log_json(file_path: str, data: list):
+        """
+        Save logs in JSON format.
+        """
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
 
     @staticmethod
     def _log_csv(file_path: str, data: list):
+        """
+        Save logs in CSV format.
+        """
         with open(file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=["status_code", "url", "elapsed_time"])
             writer.writeheader()
@@ -154,6 +204,9 @@ class Logger:
 
     @staticmethod
     def _log_html(file_path: str, data: list):
+        """
+        Save logs in HTML format with a styled table.
+        """
         with open(file_path, "w", encoding="utf-8") as f:
             f.write("""<!DOCTYPE html>
 <html>
@@ -180,6 +233,9 @@ class Logger:
 
     @staticmethod
     def _log_md(file_path: str, data: list):
+        """
+        Save logs in Markdown format.
+        """
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(f"{data[0]['timestamp']}\n\n")
             f.write(f"```shell\n{data[0]['command']}\n```\n\n")
@@ -190,6 +246,9 @@ class Logger:
 
     @staticmethod
     def _log_xml(file_path: str, data: list):
+        """
+        Save logs in XML format.
+        """
         root = ET.Element("logs")
         for item in data:
             entry = ET.SubElement(root, "entry")
@@ -200,10 +259,16 @@ class Logger:
 
     @staticmethod
     def _log_yaml(file_path: str, data: list):
+        """
+        Save logs in YAML format.
+        """
         with open(file_path, "w", encoding="utf-8") as f:
             yaml.dump(data, f, allow_unicode=True, default_flow_style=False)
 
     @staticmethod
     def _log_xlsx(file_path: str, data: list):
+        """
+        Save logs in Excel (.xlsx) format.
+        """
         df = pd.DataFrame(data)
         df.to_excel(file_path, index=False)

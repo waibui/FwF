@@ -29,6 +29,19 @@ from core.logger import Logger
 from model.result import Result
 
 async def request(session, path, user_agent, args):
+    """
+    Send an HTTP GET request to the constructed full URL and optionally extract links from the response.
+
+    Args:
+        session: aiohttp.ClientSession used to perform the request.
+        path: Path to append to the base URL.
+        user_agent: User-Agent string or type to use for the request.
+        args: Parsed arguments containing configuration (base URL, timeout, cookies, etc.).
+
+    Returns:
+        A tuple (Result, list of extracted links).
+        If the response matches desired status codes and scraping is enabled, links will be extracted.
+    """
     full_url = f"{args.url.rstrip('/')}/{path.lstrip('/')}"
     headers = {"User-Agent": random_user_agent(user_agent)}
     
@@ -65,6 +78,17 @@ async def request(session, path, user_agent, args):
     return None, []
 
 def extract_links(base_url, html_content, args):
+    """
+    Extract and normalize internal links from an HTML page.
+
+    Args:
+        base_url: The base URL to resolve relative links.
+        html_content: The HTML content as a string or bytes.
+        args: Parsed arguments containing the target base URL.
+
+    Returns:
+        A list of valid, unique, internal links found in the HTML content.
+    """
     crawled_links = set()
     extracted_links = []
     try:
@@ -100,6 +124,18 @@ def extract_links(base_url, html_content, args):
         return []
 
 async def check_link_status(session, url, user_agent, args):
+    """
+    Check the HTTP status of a single extracted link.
+
+    Args:
+        session: aiohttp.ClientSession used to perform the request.
+        url: The full URL to check.
+        user_agent: User-Agent string or type to use for the request.
+        args: Parsed arguments including timeout, proxy, etc.
+
+    Returns:
+        A Result object if the response status matches specified codes, otherwise None.
+    """
     headers = {"User-Agent": random_user_agent(user_agent)}
     kwargs = {
         "headers": headers,
