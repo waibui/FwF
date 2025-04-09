@@ -22,17 +22,17 @@
 
 import os
 
-class Setting:
+class Config:
     
-    # General settings
+    # General Config
     APP_NAME = "psdir"
     VERSION = "1.0.0"
     USAGE = "psdir.py [-u|--url] target [options]."
     CHOOSE = "Choose -h/--help option for more detail."
-    EPILOG = "See 'config/settings.py' for the example configuration file"
+    EPILOG = "See 'config/config.py' for the example configuration file"
     FILETYPE =[".txt", ".log", ".json", ".csv", ".xlsx", ".yaml", ".yml", ".md", ".html", ".xml"]
     
-    # Scan settings
+    # Scan Config
     DEFAULT_TIMEOUT = 10
     DEFAULT_THREAD = 50
     DEFAULT_STATUS = [200, 204, 301, 302, 307, 401, 403, 429]

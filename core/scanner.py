@@ -21,9 +21,11 @@
 #  SOFTWARE.
 
 import asyncio
+
 import aiohttp
+
 from core.logger import Logger
-from utils.request_handler import check_link_status, request
+from network.request_handler import check_link_status, request
 
 class Scanner:
     """

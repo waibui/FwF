@@ -24,8 +24,8 @@ import sys
 import subprocess
 import pkg_resources
 
-from core.config import Setting
-from model.exception import DependencyError, RequirementsFileNotFoundError
+from core.config import Config
+from core.exception import DependencyError, RequirementsFileNotFoundError
 
 def install_dependencies():
     """
@@ -61,12 +61,12 @@ def get_dependencies():
         IOError: If there is an error reading the file.
     """
     try: 
-        with open(Setting.REQUIREMENTS, 'r', encoding="utf-8") as f:
+        with open(Config.REQUIREMENTS, 'r', encoding="utf-8") as f:
             return [line.strip() for line in f if line.strip() and not line.startswith("#")]
     except FileNotFoundError as e:    
-        raise RequirementsFileNotFoundError(f"Requirements file not found: {Setting.REQUIREMENTS}") from e
+        raise RequirementsFileNotFoundError(f"Requirements file not found: {Config.REQUIREMENTS}") from e
     except IOError as e:
-        raise IOError(f"Error reading the requirements file: {Setting.REQUIREMENTS}") from e
+        raise IOError(f"Error reading the requirements file: {Config.REQUIREMENTS}") from e
 
 def check_dependencies():
     """

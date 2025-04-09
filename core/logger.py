@@ -28,7 +28,7 @@ import yaml
 import xml.etree.ElementTree as ET
 import pandas as pd
 from datetime import datetime
-from model.result import Result
+from core.result import Result
 
 
 class Logger:
