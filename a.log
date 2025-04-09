@@ -1,1 +1,0 @@
-[2025-04-09 19:02:29] Executed Command: psdir.py -u google.com -c 100 -o a.log -t 20 -w data/common.txt -ar --cookie 22=2
