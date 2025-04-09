@@ -71,10 +71,21 @@ def valid_cookie(value: str) -> str:
     return value
 
 def valid_proxy(value: str) -> str:
-    """Validate the proxy format (http://user:pass@host:port or https://host:port)."""
-    proxy_pattern = re.compile(r"^(https?://)(\S+(:\S+)?@)?([\w.-]+):(\d+)$")
+    """
+    Validate proxy format:
+    - http[s]://host:port
+    - http[s]://user:pass@host:port
+    """
+    proxy_pattern = re.compile(
+        r"^(https?://)"                  
+        r"(?:(\S+):(\S+)@)?"             
+        r"((?:[\w.-]+)|(?:\d{1,3}(?:\.\d{1,3}){3}))"  
+        r":(\d{2,5})$"                  
+    )
     if not proxy_pattern.match(value):
-        raise argparse.ArgumentTypeError("Invalid proxy format. Use 'http://user:pass@host:port' or 'https://host:port'.")
+        raise argparse.ArgumentTypeError(
+            "Invalid proxy format. Use 'http://user:pass@host:port' or 'https://host:port'."
+        )
     return value
 
 def valid_output(value: str) -> str:
