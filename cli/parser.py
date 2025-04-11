@@ -46,7 +46,7 @@ def parse_args() -> argparse.ArgumentParser:
 
     # Optional HTTP configurations
     http_group = parser.add_argument_group("HTTP Configs")
-    http_group.add_argument("--cookie", type=valid_cookie, help="Cookies for requests (e.g., 'key=value;key2=value2')")
+    http_group.add_argument("--cookie", type=valid_cookie, help="Cookies for requests (e.g., 'key=value,key2=value2')")
     http_group.add_argument("--proxies", type=valid_proxy, help="Proxy for requests (e.g., 'http://user:pass@proxy.com:8080')")
     http_group.add_argument("-ar", "--allow-redirect", action="store_true", default=Config.ALLOW_REDIRECT, help="Allow HTTP redirects (true/false)")
     http_group.add_argument("-s", "--scrape", action="store_true", default=Config.ALLOW_SCRAPE, help="Scrape <a> tags and request their URLs")

@@ -25,7 +25,7 @@ def parse_cookie(cookie_str):
     try:
         return dict(
             item.strip().split("=", 1) 
-            for item in cookie_str.split(";") 
+            for item in cookie_str.split(",") 
             if "=" in item
         )
     except Exception:
