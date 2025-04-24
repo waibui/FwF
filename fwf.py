@@ -19,6 +19,7 @@ try:
     from src.output.banner import display_banner
 except ImportError as e:
     print("Error importing", str(e))
+    print("Run: pip install -r requirements.txt")
 
 logger = Logger.get_instance()
 
@@ -59,4 +60,5 @@ if __name__ == "__main__":
         logger.debug("User interupted")
         exit(0)
     except Exception as e:
-        logger.error(str(e))
+        exit(0)
+        
