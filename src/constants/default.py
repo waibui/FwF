@@ -16,7 +16,7 @@ LICENSE = "MIT"
 URL = "https://github.com/waibui/FwF"        
 COPYRIGHT = f"© 2025 {AUTHOR}"
 USAGE = "python fwf.py [-u|--url] target [options]"
-EPILOG = "Example"
+EPILOG = "Example: python -u example.com -r -mc 200,301"
 
 # Project paths
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
