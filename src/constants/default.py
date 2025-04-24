@@ -5,6 +5,7 @@ FwF - Fast Web Fuzzer: A web path discovery tool
 Author: WaiBui
 License: MIT
 """
+
 from pathlib import Path
 
 # Project info

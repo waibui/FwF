@@ -9,6 +9,7 @@ from src.output.logger import Logger
 from src.models.config import ScanConfig
 from src.models.result import ScanResult
 from src.scanner.crawler import WebCrawler
+from src.output.writer import FileWriter
 from src.input.file_loader import load_wordlist, load_user_agent
 from src.input.cli_parser import parse_cookies
 
@@ -36,6 +37,7 @@ class FwFScanner:
         logger.info("Status Code Match", self.config.match_codes)
         logger.info("Crawling Enabled", self.config.crawl)
         logger.info("Crawl Depth", self.config.crawl_depth if self.config.crawl else "N/A")
+        logger.info("Output File", getattr(self.config, 'output', None) or "None")
         logger.info("Wordlist Loaded", f"{len(self.wordlist)} entries")
         logger.info("User-Agents Loaded", f"{len(self.user_agents)} entries")
         print("-"*60)
@@ -63,6 +65,9 @@ class FwFScanner:
 
         await self._perform_scan()
 
+        if self.config.output:
+            [FileWriter.write_results(self.found_paths, file) for file in self.config.output.split(',')]
+            
         elapsed = time.time() - self.start_time
         print('-'*60)
         logger.info("Scan completed", f"{elapsed:.2f}s elapsed, {len(self.found_paths)} paths found")

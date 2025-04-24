@@ -33,7 +33,6 @@ def parse_arguments():
     http = parser.add_argument_group("http option")
     http.add_argument(
         "-u", "--url",
-        required=True,
         type=Validator.is_valid_url,
         help="Target URL"
     )
@@ -141,6 +140,11 @@ def parse_arguments():
     
     if args.version:
         logger.info("version", default.VERSION)
+        exit(0)
+        
+    if not args.url:
+        logger.error("-u option required")
+        logger.error("use", default.USAGE)
         exit(0)
     
     return args

@@ -1,0 +1,946 @@
+command: fwf.py -u google.com -o a.md,a.csv,a.html,a.txt,a.json,a.xlsx,a.yaml,a.yml,a.md,a.xml
+  --color -r -c 200
+results:
+- content_length: 10765
+  content_type: application/json
+  path: .well-known/assetlinks.json
+  response_time: 1.98
+  status: 200
+  url: https://google.com/.well-known/assetlinks.json
+- content_length: 275
+  content_type: text/plain
+  path: .well-known/security.txt
+  response_time: 1.582
+  status: 200
+  url: https://google.com/.well-known/security.txt
+- content_length: 113235
+  content_type: text/html; charset=utf-8
+  path: Research
+  response_time: 1.541
+  status: 200
+  url: https://google.com/Research
+- content_length: 125449
+  content_type: text/html
+  path: about
+  response_time: 1.245
+  status: 200
+  url: https://google.com/about
+- content_length: 141126
+  content_type: text/html
+  path: accessibility
+  response_time: 8.496
+  status: 200
+  url: https://google.com/accessibility
+- content_length: 1067557
+  content_type: text/html; charset=utf-8
+  path: account
+  response_time: 1.625
+  status: 200
+  url: https://google.com/account
+- content_length: 1121996
+  content_type: text/html; charset=utf-8
+  path: accounts
+  response_time: 3.435
+  status: 200
+  url: https://google.com/accounts
+- content_length: 228490
+  content_type: text/html; charset=utf-8
+  path: activity
+  response_time: 8.231
+  status: 200
+  url: https://google.com/activity
+- content_length: 480424
+  content_type: text/html; charset=utf-8
+  path: ads
+  response_time: 5.095
+  status: 200
+  url: https://google.com/ads
+- content_length: 276451
+  content_type: text/html; charset=UTF-8
+  path: advanced_search
+  response_time: 1.73
+  status: 200
+  url: https://google.com/advanced_search
+- content_length: 480424
+  content_type: text/html; charset=utf-8
+  path: advertise
+  response_time: 1.86
+  status: 200
+  url: https://google.com/advertise
+- content_length: 480424
+  content_type: text/html; charset=utf-8
+  path: advertisers
+  response_time: 1.379
+  status: 200
+  url: https://google.com/advertisers
+- content_length: 480424
+  content_type: text/html; charset=utf-8
+  path: advertising
+  response_time: 4.816
+  status: 200
+  url: https://google.com/advertising
+- content_length: 231653
+  content_type: text/html; charset=utf-8
+  path: africa
+  response_time: 8.279
+  status: 200
+  url: https://google.com/africa
+- content_length: 145831
+  content_type: text/html; charset=UTF-8
+  path: alerts
+  response_time: 3.641
+  status: 200
+  url: https://google.com/alerts
+- content_length: 118404
+  content_type: text/html
+  path: analytics
+  response_time: 6.882
+  status: 200
+  url: https://google.com/analytics
+- content_length: 292246
+  content_type: text/html
+  path: android
+  response_time: 1.472
+  status: 200
+  url: https://google.com/android
+- content_length: 2912
+  content_type: text/html
+  path: answers
+  response_time: 1.631
+  status: 200
+  url: https://google.com/answers
+- content_length: 5418
+  content_type: text/html
+  path: apis
+  response_time: 6.711
+  status: 200
+  url: https://google.com/apis
+- content_length: 42512
+  content_type: application/json
+  path: apple-app-site-association
+  response_time: 3.05
+  status: 200
+  url: https://google.com/apple-app-site-association
+- content_length: 1634709
+  content_type: text/html; charset=utf-8
+  path: appliance
+  response_time: 6.964
+  status: 200
+  url: https://google.com/appliance
+- content_length: 1228859
+  content_type: text/html; charset=UTF-8
+  path: blocked
+  response_time: 2.275
+  status: 200
+  url: https://google.com/blocked
+- content_length: 371456
+  content_type: text/html; charset=utf-8
+  path: blog
+  response_time: 7.417
+  status: 200
+  url: https://google.com/blog
+- content_length: 151616
+  content_type: text/html; charset=utf-8
+  path: business
+  response_time: 4.126
+  status: 200
+  url: https://google.com/business
+- content_length: 345758
+  content_type: text/html
+  path: calendar
+  response_time: 7.315
+  status: 200
+  url: https://google.com/calendar
+- content_length: 719879
+  content_type: text/html; charset=utf-8
+  path: careers
+  response_time: 5.188
+  status: 200
+  url: https://google.com/careers
+- content_length: 2229
+  content_type: text/html
+  path: cars
+  response_time: 1.286
+  status: 200
+  url: https://google.com/cars
+- content_length: 371808
+  content_type: text/html
+  path: chat
+  response_time: 2.971
+  status: 200
+  url: https://google.com/chat
+- content_length: 425106
+  content_type: text/html; charset=UTF-8
+  path: chrome
+  response_time: 0.787
+  status: 200
+  url: https://google.com/chrome
+- content_length: 529153
+  content_type: text/html; charset=utf-8
+  path: collection
+  response_time: 1.409
+  status: 200
+  url: https://google.com/collection
+- content_length: 125449
+  content_type: text/html
+  path: company
+  response_time: 2.322
+  status: 200
+  url: https://google.com/company
+- content_length: 1621
+  content_type: text/html
+  path: compare
+  response_time: 5.021
+  status: 200
+  url: https://google.com/compare
+- content_length: 95439
+  content_type: text/html
+  path: contact
+  response_time: 1.227
+  status: 200
+  url: https://google.com/contact
+- content_length: 1130681
+  content_type: text/html; charset=utf-8
+  path: contacts
+  response_time: 1.628
+  status: 200
+  url: https://google.com/contacts
+- content_length: 1621
+  content_type: text/html
+  path: creditcards
+  response_time: 1.593
+  status: 200
+  url: https://google.com/creditcards
+- content_length: 235
+  content_type: text/x-cross-domain-policy
+  path: crossdomain.xml
+  response_time: 1.284
+  status: 200
+  url: https://google.com/crossdomain.xml
+- content_length: 276559
+  content_type: text/html; charset=UTF-8
+  path: custom
+  response_time: 4.802
+  status: 200
+  url: https://google.com/custom
+- content_length: 679183
+  content_type: text/html; charset=utf-8
+  path: dashboard
+  response_time: 3.349
+  status: 200
+  url: https://google.com/dashboard
+- content_length: 1241788
+  content_type: text/html; charset=UTF-8
+  path: deleted
+  response_time: 4.436
+  status: 200
+  url: https://google.com/deleted
+- content_length: 94890
+  content_type: text/html; charset=utf-8
+  path: design
+  response_time: 7.271
+  status: 200
+  url: https://google.com/design
+- content_length: 178313
+  content_type: text/html; charset=utf-8
+  path: developer
+  response_time: 1.519
+  status: 200
+  url: https://google.com/developer
+- content_length: 178309
+  content_type: text/html; charset=utf-8
+  path: developers
+  response_time: 6.464
+  status: 200
+  url: https://google.com/developers
+- content_length: 2929702
+  content_type: text/html; charset=utf-8
+  path: device
+  response_time: 5.524
+  status: 200
+  url: https://google.com/device
+- content_length: 692730
+  content_type: text/html; charset=utf-8
+  path: devices
+  response_time: 2.043
+  status: 200
+  url: https://google.com/devices
+- content_length: 1059953
+  content_type: text/html; charset=utf-8
+  path: docs
+  response_time: 2.921
+  status: 200
+  url: https://google.com/docs
+- content_length: 125214
+  content_type: text/html
+  path: doubleclick
+  response_time: 6.967
+  status: 200
+  url: https://google.com/doubleclick
+- content_length: 1720154
+  content_type: text/html; charset=utf-8
+  path: ebooks
+  response_time: 9.745
+  status: 200
+  url: https://google.com/ebooks
+- content_length: 380384
+  content_type: text/html
+  path: edu
+  response_time: 5.732
+  status: 200
+  url: https://google.com/edu
+- content_length: 380384
+  content_type: text/html
+  path: education
+  response_time: 5.794
+  status: 200
+  url: https://google.com/education
+- content_length: 1780549
+  content_type: text/html; charset=utf-8
+  path: enterprise
+  response_time: 6.898
+  status: 200
+  url: https://google.com/enterprise
+- content_length: 5430
+  content_type: image/x-icon
+  path: favicon.ico
+  response_time: 3.954
+  status: 200
+  url: https://google.com/favicon.ico
+- content_length: 181322
+  content_type: text/html; charset=utf-8
+  path: fi
+  response_time: 8.487
+  status: 200
+  url: https://google.com/fi
+- content_length: 1032406
+  content_type: text/html; charset=utf-8
+  path: finance
+  response_time: 4.401
+  status: 200
+  url: https://google.com/finance
+- content_length: 215951
+  content_type: text/html; charset=UTF-8
+  path: firefox
+  response_time: 2.436
+  status: 200
+  url: https://google.com/firefox
+- content_length: 1563654
+  content_type: text/html; charset=utf-8
+  path: flights
+  response_time: 1.013
+  status: 200
+  url: https://google.com/flights
+- content_length: 1156600
+  content_type: text/html; charset=utf-8
+  path: forms
+  response_time: 3.905
+  status: 200
+  url: https://google.com/forms
+- content_length: 120950
+  content_type: text/html
+  path: fotos
+  response_time: 2.295
+  status: 200
+  url: https://google.com/fotos
+- content_length: 273094
+  content_type: text/html; charset=UTF-8
+  path: friends
+  response_time: 5.318
+  status: 200
+  url: https://google.com/friends
+- content_length: 2225331
+  content_type: text/html; charset=utf-8
+  path: games
+  response_time: 9.804
+  status: 200
+  url: https://google.com/games
+- content_length: 51293
+  content_type: text/html
+  path: grants
+  response_time: 2.131
+  status: 200
+  url: https://google.com/grants
+- content_length: 164001
+  content_type: text/html
+  path: green
+  response_time: 7.113
+  status: 200
+  url: https://google.com/green
+- content_length: 1059939
+  content_type: text/html; charset=utf-8
+  path: groups
+  response_time: 2.107
+  status: 200
+  url: https://google.com/groups
+- content_length: 120230
+  content_type: text/html
+  path: health
+  response_time: 10.19
+  status: 200
+  url: https://google.com/health
+- content_length: 9003
+  content_type: text/html
+  path: hire
+  response_time: 6.853
+  status: 200
+  url: https://google.com/hire
+- content_length: 228694
+  content_type: text/html; charset=utf-8
+  path: history
+  response_time: 7.873
+  status: 200
+  url: https://google.com/history
+- content_length: 64075
+  content_type: text/html
+  path: home
+  response_time: 1.409
+  status: 200
+  url: https://google.com/home
+- content_length: 1242939
+  content_type: text/html; charset=UTF-8
+  path: homepage
+  response_time: 3.572
+  status: 200
+  url: https://google.com/homepage
+- content_length: 1407
+  content_type: text/html
+  path: hosted
+  response_time: 2.447
+  status: 200
+  url: https://google.com/hosted
+- content_length: 1975737
+  content_type: text/html; charset=utf-8
+  path: hotels
+  response_time: 1.997
+  status: 200
+  url: https://google.com/hotels
+- content_length: 286
+  content_type: text/plain
+  path: humans.txt
+  response_time: 3.014
+  status: 200
+  url: https://google.com/humans.txt
+- content_length: 8148
+  content_type: text/html
+  path: ideas
+  response_time: 6.863
+  status: 200
+  url: https://google.com/ideas
+- content_length: 1968
+  content_type: text/html
+  path: ie
+  response_time: 1.059
+  status: 200
+  url: https://google.com/ie
+- content_length: 196006
+  content_type: text/html; charset=UTF-8
+  path: ig
+  response_time: 1.924
+  status: 200
+  url: https://google.com/ig
+- content_length: 271938
+  content_type: text/html; charset=UTF-8
+  path: images
+  response_time: 3.064
+  status: 200
+  url: https://google.com/images
+- content_length: 133466
+  content_type: text/html
+  path: inbox
+  response_time: 2.306
+  status: 200
+  url: https://google.com/inbox
+- content_length: 190841
+  content_type: text/html; charset=UTF-8
+  path: index.html
+  response_time: 0.804
+  status: 200
+  url: https://google.com/index.html
+- content_length: 8148
+  content_type: text/html
+  path: jigsaw
+  response_time: 6.894
+  status: 200
+  url: https://google.com/jigsaw
+- content_length: 38771
+  content_type: text/html
+  path: jobs
+  response_time: 7.136
+  status: 200
+  url: https://google.com/jobs
+- content_length: 28484
+  content_type: text/html
+  path: jump
+  response_time: 2.678
+  status: 200
+  url: https://google.com/jump
+- content_length: 320919
+  content_type: text/html
+  path: keep
+  response_time: 1.323
+  status: 200
+  url: https://google.com/keep
+- content_length: 84536
+  content_type: text/html
+  path: labs
+  response_time: 7.192
+  status: 200
+  url: https://google.com/labs
+- content_length: 192820
+  content_type: text/html; charset=utf-8
+  path: logos
+  response_time: 2.934
+  status: 200
+  url: https://google.com/logos
+- content_length: 276546
+  content_type: text/html; charset=UTF-8
+  path: m
+  response_time: 5.359
+  status: 200
+  url: https://google.com/m
+- content_length: 127546
+  content_type: text/html
+  path: mail
+  response_time: 4.53
+  status: 200
+  url: https://google.com/mail
+- content_length: 62
+  content_type: application/json; charset=UTF-8
+  path: manifest
+  response_time: 0.656
+  status: 200
+  url: https://google.com/manifest
+- content_length: 1790071
+  content_type: text/html; charset=utf-8
+  path: mini
+  response_time: 7.032
+  status: 200
+  url: https://google.com/mini
+- content_length: 891790
+  content_type: text/html
+  path: mobile
+  response_time: 1.803
+  status: 200
+  url: https://google.com/mobile
+- content_length: 1139895
+  content_type: text/html; charset=UTF-8
+  path: moderator
+  response_time: 4.947
+  status: 200
+  url: https://google.com/moderator
+- content_length: 82703
+  content_type: text/html; charset=UTF-8
+  path: movies
+  response_time: 2.079
+  status: 200
+  url: https://google.com/movies
+- content_length: 5777
+  content_type: text/html; charset=utf-8
+  path: music
+  response_time: 9.848
+  status: 200
+  url: https://google.com/music
+- content_length: 81107
+  content_type: text/html
+  path: myaccount
+  response_time: 1.378
+  status: 200
+  url: https://google.com/myaccount
+- content_length: 891790
+  content_type: text/html
+  path: navigation
+  response_time: 2.493
+  status: 200
+  url: https://google.com/navigation
+- content_length: 1546340
+  content_type: text/html; charset=utf-8
+  path: news
+  response_time: 1.857
+  status: 200
+  url: https://google.com/news
+- content_length: 72968
+  content_type: text/html
+  path: offers
+  response_time: 2.737
+  status: 200
+  url: https://google.com/offers
+- content_length: 300102
+  content_type: text/html; charset=utf-8
+  path: 'on'
+  response_time: 6.992
+  status: 200
+  url: https://google.com/on
+- content_length: 10026
+  content_type: text/html; charset=utf-8
+  path: partners
+  response_time: 1.176
+  status: 200
+  url: https://google.com/partners
+- content_length: 1239862
+  content_type: text/html; charset=UTF-8
+  path: password
+  response_time: 2.317
+  status: 200
+  url: https://google.com/password
+- content_length: 4149
+  content_type: text/html
+  path: patents
+  response_time: 10.285
+  status: 200
+  url: https://google.com/patents
+- content_length: 292
+  content_type: text/html
+  path: pay
+  response_time: 3.563
+  status: 200
+  url: https://google.com/pay
+- content_length: 898
+  content_type: text/html; charset=utf-8
+  path: payments
+  response_time: 9.3
+  status: 200
+  url: https://google.com/payments
+- content_length: 195984
+  content_type: text/html; charset=UTF-8
+  path: pda
+  response_time: 1.805
+  status: 200
+  url: https://google.com/pda
+- content_length: 322713
+  content_type: text/html; charset=utf-8
+  path: phone
+  response_time: 7.163
+  status: 200
+  url: https://google.com/phone
+- content_length: 296719
+  content_type: text/html; charset=utf-8
+  path: phones
+  response_time: 1.508
+  status: 200
+  url: https://google.com/phones
+- content_length: 120950
+  content_type: text/html
+  path: photos
+  response_time: 2.244
+  status: 200
+  url: https://google.com/photos
+- content_length: 95852
+  content_type: text/html
+  path: pixel
+  response_time: 2.692
+  status: 200
+  url: https://google.com/pixel
+- content_length: 151616
+  content_type: text/html; charset=utf-8
+  path: places
+  response_time: 2.803
+  status: 200
+  url: https://google.com/places
+- content_length: 1326483
+  content_type: text/html; charset=utf-8
+  path: play
+  response_time: 9.883
+  status: 200
+  url: https://google.com/play
+- content_length: 1349
+  content_type: text/html
+  path: policies
+  response_time: 5.171
+  status: 200
+  url: https://google.com/policies
+- content_length: 167232
+  content_type: text/html; charset=UTF-8
+  path: preferences
+  response_time: 1.005
+  status: 200
+  url: https://google.com/preferences
+- content_length: 382751
+  content_type: text/html; charset=utf-8
+  path: press
+  response_time: 1.669
+  status: 200
+  url: https://google.com/press
+- content_length: 199382
+  content_type: text/html; charset=UTF-8
+  path: privacypolicy
+  response_time: 0.778
+  status: 200
+  url: https://google.com/privacypolicy
+- content_length: 256138
+  content_type: text/html; charset=utf-8
+  path: publications
+  response_time: 2.323
+  status: 200
+  url: https://google.com/publications
+- content_length: 81540
+  content_type: text/html; charset=utf-8
+  path: publisher
+  response_time: 9.808
+  status: 200
+  url: https://google.com/publisher
+- content_length: 1053846
+  content_type: text/html; charset=utf-8
+  path: recovery
+  response_time: 4.41
+  status: 200
+  url: https://google.com/recovery
+- content_length: 2692
+  content_type: text/html
+  path: related
+  response_time: 4.844
+  status: 200
+  url: https://google.com/related
+- content_length: 818
+  content_type: text/html; charset=utf-8
+  path: reporting
+  response_time: 2.732
+  status: 200
+  url: https://google.com/reporting
+- content_length: 113235
+  content_type: text/html; charset=utf-8
+  path: research
+  response_time: 2.849
+  status: 200
+  url: https://google.com/research
+- content_length: 196118
+  content_type: text/html; charset=utf-8
+  path: retail
+  response_time: 2.791
+  status: 200
+  url: https://google.com/retail
+- content_length: 9246
+  content_type: text/plain
+  path: robots.txt
+  response_time: 2.215
+  status: 200
+  url: https://google.com/robots.txt
+- content_length: 515316
+  content_type: text/html; charset=utf-8
+  path: save
+  response_time: 2.365
+  status: 200
+  url: https://google.com/save
+- content_length: 519612
+  content_type: text/html; charset=utf-8
+  path: saved
+  response_time: 0.955
+  status: 200
+  url: https://google.com/saved
+- content_length: 576103
+  content_type: text/html; charset=utf-8
+  path: saves
+  response_time: 3.699
+  status: 200
+  url: https://google.com/saves
+- content_length: 156794
+  content_type: text/html; charset=utf-8
+  path: script
+  response_time: 2.296
+  status: 200
+  url: https://google.com/script
+- content_length: 276543
+  content_type: text/html; charset=UTF-8
+  path: search
+  response_time: 5.096
+  status: 200
+  url: https://google.com/search
+- content_length: 151616
+  content_type: text/html; charset=utf-8
+  path: services
+  response_time: 1.754
+  status: 200
+  url: https://google.com/services
+- content_length: 763257
+  content_type: text/html; charset=utf-8
+  path: shopping
+  response_time: 6.746
+  status: 200
+  url: https://google.com/shopping
+- content_length: 2223
+  content_type: text/xml
+  path: sitemap.xml
+  response_time: 1.181
+  status: 200
+  url: https://google.com/sitemap.xml
+- content_length: 144575
+  content_type: text/html; charset=utf-8
+  path: sitemaps
+  response_time: 7.531
+  status: 200
+  url: https://google.com/sitemaps
+- content_length: 1068551
+  content_type: text/html; charset=utf-8
+  path: sites
+  response_time: 8.086
+  status: 200
+  url: https://google.com/sites
+- content_length: 1651831
+  content_type: text/html; charset=utf-8
+  path: sitesearch
+  response_time: 6.923
+  status: 200
+  url: https://google.com/sitesearch
+- content_length: 1068298
+  content_type: text/html; charset=utf-8
+  path: slides
+  response_time: 3.237
+  status: 200
+  url: https://google.com/slides
+- content_length: 3457
+  content_type: text/html
+  path: sms
+  response_time: 1.035
+  status: 200
+  url: https://google.com/sms
+- content_length: 302055
+  content_type: text/html; charset=utf-8
+  path: store
+  response_time: 3.093
+  status: 200
+  url: https://google.com/store
+- content_length: 691329
+  content_type: text/html; charset=utf-8
+  path: student
+  response_time: 5.765
+  status: 200
+  url: https://google.com/student
+- content_length: 657303
+  content_type: text/html; charset=utf-8
+  path: students
+  response_time: 2.683
+  status: 200
+  url: https://google.com/students
+- content_length: 1135429
+  content_type: text/html; charset=UTF-8
+  path: support
+  response_time: 9.183
+  status: 200
+  url: https://google.com/support
+- content_length: 104270
+  content_type: text/html
+  path: survey
+  response_time: 6.952
+  status: 200
+  url: https://google.com/survey
+- content_length: 104270
+  content_type: text/html
+  path: surveys
+  response_time: 6.929
+  status: 200
+  url: https://google.com/surveys
+- content_length: 1266058
+  content_type: text/html; charset=UTF-8
+  path: tags
+  response_time: 5.488
+  status: 200
+  url: https://google.com/tags
+- content_length: 1059593
+  content_type: text/html; charset=utf-8
+  path: talk
+  response_time: 4.677
+  status: 200
+  url: https://google.com/talk
+- content_length: 891790
+  content_type: text/html
+  path: technology
+  response_time: 4.418
+  status: 200
+  url: https://google.com/technology
+- content_length: 1146213
+  content_type: text/html; charset=UTF-8
+  path: toolbar
+  response_time: 5.06
+  status: 200
+  url: https://google.com/toolbar
+- content_length: 425106
+  content_type: text/html; charset=UTF-8
+  path: tools
+  response_time: 4.917
+  status: 200
+  url: https://google.com/tools
+- content_length: 2712750
+  content_type: text/html; charset=utf-8
+  path: translate
+  response_time: 1.188
+  status: 200
+  url: https://google.com/translate
+- content_length: 1108534
+  content_type: text/html; charset=utf-8
+  path: travel
+  response_time: 2.444
+  status: 200
+  url: https://google.com/travel
+- content_length: 711114
+  content_type: text/html; charset=utf-8
+  path: trends
+  response_time: 3.585
+  status: 200
+  url: https://google.com/trends
+- content_length: 371126
+  content_type: text/html
+  path: tv
+  response_time: 1.116
+  status: 200
+  url: https://google.com/tv
+- content_length: 272106
+  content_type: text/html; charset=UTF-8
+  path: video
+  response_time: 1.591
+  status: 200
+  url: https://google.com/video
+- content_length: 195956
+  content_type: text/html; charset=UTF-8
+  path: views
+  response_time: 2.435
+  status: 200
+  url: https://google.com/views
+- content_length: 132644
+  content_type: text/html; charset=utf-8
+  path: webmaster
+  response_time: 5.509
+  status: 200
+  url: https://google.com/webmaster
+- content_length: 132640
+  content_type: text/html; charset=utf-8
+  path: webmasters
+  response_time: 1.746
+  status: 200
+  url: https://google.com/webmasters
+- content_length: 891790
+  content_type: text/html
+  path: whatsnew
+  response_time: 5.134
+  status: 200
+  url: https://google.com/whatsnew
+- content_length: 300115
+  content_type: text/html; charset=utf-8
+  path: wifi
+  response_time: 7.207
+  status: 200
+  url: https://google.com/wifi
+- content_length: 276543
+  content_type: text/html; charset=UTF-8
+  path: wml
+  response_time: 4.597
+  status: 200
+  url: https://google.com/wml
+- content_length: 1781541
+  content_type: text/html; charset=utf-8
+  path: work
+  response_time: 7.022
+  status: 200
+  url: https://google.com/work
+- content_length: 175198
+  content_type: text/html; charset=UTF-8
+  path: xhtml
+  response_time: 3.418
+  status: 200
+  url: https://google.com/xhtml
+- content_length: 0
+  content_type: text/html; charset=UTF-8
+  path: adview
+  response_time: 4.474
+  status: 204
+  url: https://google.com/adview
+scan_date: '2025-04-24 15:43:17'

@@ -1,0 +1,1102 @@
+# FwF Scanner Results - 2025-04-24 15:43:17
+# Command: fwf.py -u google.com -o a.md,a.csv,a.html,a.txt,a.json,a.xlsx,a.yaml,a.yml,a.md,a.xml --color -r -c 200
+
+URL: https://google.com/.well-known/assetlinks.json
+Path: .well-known/assetlinks.json
+Status: 200
+Content-Length: 10765
+Response-Time: 1.980s
+Content-Type: application/json
+------------------------------------------------------------
+URL: https://google.com/.well-known/security.txt
+Path: .well-known/security.txt
+Status: 200
+Content-Length: 275
+Response-Time: 1.582s
+Content-Type: text/plain
+------------------------------------------------------------
+URL: https://google.com/Research
+Path: Research
+Status: 200
+Content-Length: 113235
+Response-Time: 1.541s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/about
+Path: about
+Status: 200
+Content-Length: 125449
+Response-Time: 1.245s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/accessibility
+Path: accessibility
+Status: 200
+Content-Length: 141126
+Response-Time: 8.496s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/account
+Path: account
+Status: 200
+Content-Length: 1067557
+Response-Time: 1.625s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/accounts
+Path: accounts
+Status: 200
+Content-Length: 1121996
+Response-Time: 3.435s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/activity
+Path: activity
+Status: 200
+Content-Length: 228490
+Response-Time: 8.231s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/ads
+Path: ads
+Status: 200
+Content-Length: 480424
+Response-Time: 5.095s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/advanced_search
+Path: advanced_search
+Status: 200
+Content-Length: 276451
+Response-Time: 1.730s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/advertise
+Path: advertise
+Status: 200
+Content-Length: 480424
+Response-Time: 1.860s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/advertisers
+Path: advertisers
+Status: 200
+Content-Length: 480424
+Response-Time: 1.379s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/advertising
+Path: advertising
+Status: 200
+Content-Length: 480424
+Response-Time: 4.816s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/africa
+Path: africa
+Status: 200
+Content-Length: 231653
+Response-Time: 8.279s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/alerts
+Path: alerts
+Status: 200
+Content-Length: 145831
+Response-Time: 3.641s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/analytics
+Path: analytics
+Status: 200
+Content-Length: 118404
+Response-Time: 6.882s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/android
+Path: android
+Status: 200
+Content-Length: 292246
+Response-Time: 1.472s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/answers
+Path: answers
+Status: 200
+Content-Length: 2912
+Response-Time: 1.631s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/apis
+Path: apis
+Status: 200
+Content-Length: 5418
+Response-Time: 6.711s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/apple-app-site-association
+Path: apple-app-site-association
+Status: 200
+Content-Length: 42512
+Response-Time: 3.050s
+Content-Type: application/json
+------------------------------------------------------------
+URL: https://google.com/appliance
+Path: appliance
+Status: 200
+Content-Length: 1634709
+Response-Time: 6.964s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/blocked
+Path: blocked
+Status: 200
+Content-Length: 1228859
+Response-Time: 2.275s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/blog
+Path: blog
+Status: 200
+Content-Length: 371456
+Response-Time: 7.417s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/business
+Path: business
+Status: 200
+Content-Length: 151616
+Response-Time: 4.126s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/calendar
+Path: calendar
+Status: 200
+Content-Length: 345758
+Response-Time: 7.315s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/careers
+Path: careers
+Status: 200
+Content-Length: 719879
+Response-Time: 5.188s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/cars
+Path: cars
+Status: 200
+Content-Length: 2229
+Response-Time: 1.286s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/chat
+Path: chat
+Status: 200
+Content-Length: 371808
+Response-Time: 2.971s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/chrome
+Path: chrome
+Status: 200
+Content-Length: 425106
+Response-Time: 0.787s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/collection
+Path: collection
+Status: 200
+Content-Length: 529153
+Response-Time: 1.409s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/company
+Path: company
+Status: 200
+Content-Length: 125449
+Response-Time: 2.322s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/compare
+Path: compare
+Status: 200
+Content-Length: 1621
+Response-Time: 5.021s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/contact
+Path: contact
+Status: 200
+Content-Length: 95439
+Response-Time: 1.227s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/contacts
+Path: contacts
+Status: 200
+Content-Length: 1130681
+Response-Time: 1.628s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/creditcards
+Path: creditcards
+Status: 200
+Content-Length: 1621
+Response-Time: 1.593s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/crossdomain.xml
+Path: crossdomain.xml
+Status: 200
+Content-Length: 235
+Response-Time: 1.284s
+Content-Type: text/x-cross-domain-policy
+------------------------------------------------------------
+URL: https://google.com/custom
+Path: custom
+Status: 200
+Content-Length: 276559
+Response-Time: 4.802s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/dashboard
+Path: dashboard
+Status: 200
+Content-Length: 679183
+Response-Time: 3.349s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/deleted
+Path: deleted
+Status: 200
+Content-Length: 1241788
+Response-Time: 4.436s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/design
+Path: design
+Status: 200
+Content-Length: 94890
+Response-Time: 7.271s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/developer
+Path: developer
+Status: 200
+Content-Length: 178313
+Response-Time: 1.519s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/developers
+Path: developers
+Status: 200
+Content-Length: 178309
+Response-Time: 6.464s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/device
+Path: device
+Status: 200
+Content-Length: 2929702
+Response-Time: 5.524s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/devices
+Path: devices
+Status: 200
+Content-Length: 692730
+Response-Time: 2.043s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/docs
+Path: docs
+Status: 200
+Content-Length: 1059953
+Response-Time: 2.921s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/doubleclick
+Path: doubleclick
+Status: 200
+Content-Length: 125214
+Response-Time: 6.967s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/ebooks
+Path: ebooks
+Status: 200
+Content-Length: 1720154
+Response-Time: 9.745s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/edu
+Path: edu
+Status: 200
+Content-Length: 380384
+Response-Time: 5.732s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/education
+Path: education
+Status: 200
+Content-Length: 380384
+Response-Time: 5.794s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/enterprise
+Path: enterprise
+Status: 200
+Content-Length: 1780549
+Response-Time: 6.898s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/favicon.ico
+Path: favicon.ico
+Status: 200
+Content-Length: 5430
+Response-Time: 3.954s
+Content-Type: image/x-icon
+------------------------------------------------------------
+URL: https://google.com/fi
+Path: fi
+Status: 200
+Content-Length: 181322
+Response-Time: 8.487s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/finance
+Path: finance
+Status: 200
+Content-Length: 1032406
+Response-Time: 4.401s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/firefox
+Path: firefox
+Status: 200
+Content-Length: 215951
+Response-Time: 2.436s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/flights
+Path: flights
+Status: 200
+Content-Length: 1563654
+Response-Time: 1.013s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/forms
+Path: forms
+Status: 200
+Content-Length: 1156600
+Response-Time: 3.905s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/fotos
+Path: fotos
+Status: 200
+Content-Length: 120950
+Response-Time: 2.295s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/friends
+Path: friends
+Status: 200
+Content-Length: 273094
+Response-Time: 5.318s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/games
+Path: games
+Status: 200
+Content-Length: 2225331
+Response-Time: 9.804s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/grants
+Path: grants
+Status: 200
+Content-Length: 51293
+Response-Time: 2.131s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/green
+Path: green
+Status: 200
+Content-Length: 164001
+Response-Time: 7.113s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/groups
+Path: groups
+Status: 200
+Content-Length: 1059939
+Response-Time: 2.107s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/health
+Path: health
+Status: 200
+Content-Length: 120230
+Response-Time: 10.190s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/hire
+Path: hire
+Status: 200
+Content-Length: 9003
+Response-Time: 6.853s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/history
+Path: history
+Status: 200
+Content-Length: 228694
+Response-Time: 7.873s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/home
+Path: home
+Status: 200
+Content-Length: 64075
+Response-Time: 1.409s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/homepage
+Path: homepage
+Status: 200
+Content-Length: 1242939
+Response-Time: 3.572s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/hosted
+Path: hosted
+Status: 200
+Content-Length: 1407
+Response-Time: 2.447s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/hotels
+Path: hotels
+Status: 200
+Content-Length: 1975737
+Response-Time: 1.997s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/humans.txt
+Path: humans.txt
+Status: 200
+Content-Length: 286
+Response-Time: 3.014s
+Content-Type: text/plain
+------------------------------------------------------------
+URL: https://google.com/ideas
+Path: ideas
+Status: 200
+Content-Length: 8148
+Response-Time: 6.863s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/ie
+Path: ie
+Status: 200
+Content-Length: 1968
+Response-Time: 1.059s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/ig
+Path: ig
+Status: 200
+Content-Length: 196006
+Response-Time: 1.924s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/images
+Path: images
+Status: 200
+Content-Length: 271938
+Response-Time: 3.064s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/inbox
+Path: inbox
+Status: 200
+Content-Length: 133466
+Response-Time: 2.306s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/index.html
+Path: index.html
+Status: 200
+Content-Length: 190841
+Response-Time: 0.804s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/jigsaw
+Path: jigsaw
+Status: 200
+Content-Length: 8148
+Response-Time: 6.894s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/jobs
+Path: jobs
+Status: 200
+Content-Length: 38771
+Response-Time: 7.136s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/jump
+Path: jump
+Status: 200
+Content-Length: 28484
+Response-Time: 2.678s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/keep
+Path: keep
+Status: 200
+Content-Length: 320919
+Response-Time: 1.323s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/labs
+Path: labs
+Status: 200
+Content-Length: 84536
+Response-Time: 7.192s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/logos
+Path: logos
+Status: 200
+Content-Length: 192820
+Response-Time: 2.934s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/m
+Path: m
+Status: 200
+Content-Length: 276546
+Response-Time: 5.359s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/mail
+Path: mail
+Status: 200
+Content-Length: 127546
+Response-Time: 4.530s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/manifest
+Path: manifest
+Status: 200
+Content-Length: 62
+Response-Time: 0.656s
+Content-Type: application/json; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/mini
+Path: mini
+Status: 200
+Content-Length: 1790071
+Response-Time: 7.032s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/mobile
+Path: mobile
+Status: 200
+Content-Length: 891790
+Response-Time: 1.803s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/moderator
+Path: moderator
+Status: 200
+Content-Length: 1139895
+Response-Time: 4.947s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/movies
+Path: movies
+Status: 200
+Content-Length: 82703
+Response-Time: 2.079s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/music
+Path: music
+Status: 200
+Content-Length: 5777
+Response-Time: 9.848s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/myaccount
+Path: myaccount
+Status: 200
+Content-Length: 81107
+Response-Time: 1.378s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/navigation
+Path: navigation
+Status: 200
+Content-Length: 891790
+Response-Time: 2.493s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/news
+Path: news
+Status: 200
+Content-Length: 1546340
+Response-Time: 1.857s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/offers
+Path: offers
+Status: 200
+Content-Length: 72968
+Response-Time: 2.737s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/on
+Path: on
+Status: 200
+Content-Length: 300102
+Response-Time: 6.992s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/partners
+Path: partners
+Status: 200
+Content-Length: 10026
+Response-Time: 1.176s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/password
+Path: password
+Status: 200
+Content-Length: 1239862
+Response-Time: 2.317s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/patents
+Path: patents
+Status: 200
+Content-Length: 4149
+Response-Time: 10.285s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/pay
+Path: pay
+Status: 200
+Content-Length: 292
+Response-Time: 3.563s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/payments
+Path: payments
+Status: 200
+Content-Length: 898
+Response-Time: 9.300s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/pda
+Path: pda
+Status: 200
+Content-Length: 195984
+Response-Time: 1.805s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/phone
+Path: phone
+Status: 200
+Content-Length: 322713
+Response-Time: 7.163s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/phones
+Path: phones
+Status: 200
+Content-Length: 296719
+Response-Time: 1.508s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/photos
+Path: photos
+Status: 200
+Content-Length: 120950
+Response-Time: 2.244s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/pixel
+Path: pixel
+Status: 200
+Content-Length: 95852
+Response-Time: 2.692s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/places
+Path: places
+Status: 200
+Content-Length: 151616
+Response-Time: 2.803s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/play
+Path: play
+Status: 200
+Content-Length: 1326483
+Response-Time: 9.883s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/policies
+Path: policies
+Status: 200
+Content-Length: 1349
+Response-Time: 5.171s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/preferences
+Path: preferences
+Status: 200
+Content-Length: 167232
+Response-Time: 1.005s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/press
+Path: press
+Status: 200
+Content-Length: 382751
+Response-Time: 1.669s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/privacypolicy
+Path: privacypolicy
+Status: 200
+Content-Length: 199382
+Response-Time: 0.778s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/publications
+Path: publications
+Status: 200
+Content-Length: 256138
+Response-Time: 2.323s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/publisher
+Path: publisher
+Status: 200
+Content-Length: 81540
+Response-Time: 9.808s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/recovery
+Path: recovery
+Status: 200
+Content-Length: 1053846
+Response-Time: 4.410s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/related
+Path: related
+Status: 200
+Content-Length: 2692
+Response-Time: 4.844s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/reporting
+Path: reporting
+Status: 200
+Content-Length: 818
+Response-Time: 2.732s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/research
+Path: research
+Status: 200
+Content-Length: 113235
+Response-Time: 2.849s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/retail
+Path: retail
+Status: 200
+Content-Length: 196118
+Response-Time: 2.791s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/robots.txt
+Path: robots.txt
+Status: 200
+Content-Length: 9246
+Response-Time: 2.215s
+Content-Type: text/plain
+------------------------------------------------------------
+URL: https://google.com/save
+Path: save
+Status: 200
+Content-Length: 515316
+Response-Time: 2.365s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/saved
+Path: saved
+Status: 200
+Content-Length: 519612
+Response-Time: 0.955s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/saves
+Path: saves
+Status: 200
+Content-Length: 576103
+Response-Time: 3.699s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/script
+Path: script
+Status: 200
+Content-Length: 156794
+Response-Time: 2.296s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/search
+Path: search
+Status: 200
+Content-Length: 276543
+Response-Time: 5.096s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/services
+Path: services
+Status: 200
+Content-Length: 151616
+Response-Time: 1.754s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/shopping
+Path: shopping
+Status: 200
+Content-Length: 763257
+Response-Time: 6.746s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/sitemap.xml
+Path: sitemap.xml
+Status: 200
+Content-Length: 2223
+Response-Time: 1.181s
+Content-Type: text/xml
+------------------------------------------------------------
+URL: https://google.com/sitemaps
+Path: sitemaps
+Status: 200
+Content-Length: 144575
+Response-Time: 7.531s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/sites
+Path: sites
+Status: 200
+Content-Length: 1068551
+Response-Time: 8.086s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/sitesearch
+Path: sitesearch
+Status: 200
+Content-Length: 1651831
+Response-Time: 6.923s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/slides
+Path: slides
+Status: 200
+Content-Length: 1068298
+Response-Time: 3.237s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/sms
+Path: sms
+Status: 200
+Content-Length: 3457
+Response-Time: 1.035s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/store
+Path: store
+Status: 200
+Content-Length: 302055
+Response-Time: 3.093s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/student
+Path: student
+Status: 200
+Content-Length: 691329
+Response-Time: 5.765s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/students
+Path: students
+Status: 200
+Content-Length: 657303
+Response-Time: 2.683s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/support
+Path: support
+Status: 200
+Content-Length: 1135429
+Response-Time: 9.183s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/survey
+Path: survey
+Status: 200
+Content-Length: 104270
+Response-Time: 6.952s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/surveys
+Path: surveys
+Status: 200
+Content-Length: 104270
+Response-Time: 6.929s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/tags
+Path: tags
+Status: 200
+Content-Length: 1266058
+Response-Time: 5.488s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/talk
+Path: talk
+Status: 200
+Content-Length: 1059593
+Response-Time: 4.677s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/technology
+Path: technology
+Status: 200
+Content-Length: 891790
+Response-Time: 4.418s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/toolbar
+Path: toolbar
+Status: 200
+Content-Length: 1146213
+Response-Time: 5.060s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/tools
+Path: tools
+Status: 200
+Content-Length: 425106
+Response-Time: 4.917s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/translate
+Path: translate
+Status: 200
+Content-Length: 2712750
+Response-Time: 1.188s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/travel
+Path: travel
+Status: 200
+Content-Length: 1108534
+Response-Time: 2.444s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/trends
+Path: trends
+Status: 200
+Content-Length: 711114
+Response-Time: 3.585s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/tv
+Path: tv
+Status: 200
+Content-Length: 371126
+Response-Time: 1.116s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/video
+Path: video
+Status: 200
+Content-Length: 272106
+Response-Time: 1.591s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/views
+Path: views
+Status: 200
+Content-Length: 195956
+Response-Time: 2.435s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/webmaster
+Path: webmaster
+Status: 200
+Content-Length: 132644
+Response-Time: 5.509s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/webmasters
+Path: webmasters
+Status: 200
+Content-Length: 132640
+Response-Time: 1.746s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/whatsnew
+Path: whatsnew
+Status: 200
+Content-Length: 891790
+Response-Time: 5.134s
+Content-Type: text/html
+------------------------------------------------------------
+URL: https://google.com/wifi
+Path: wifi
+Status: 200
+Content-Length: 300115
+Response-Time: 7.207s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/wml
+Path: wml
+Status: 200
+Content-Length: 276543
+Response-Time: 4.597s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/work
+Path: work
+Status: 200
+Content-Length: 1781541
+Response-Time: 7.022s
+Content-Type: text/html; charset=utf-8
+------------------------------------------------------------
+URL: https://google.com/xhtml
+Path: xhtml
+Status: 200
+Content-Length: 175198
+Response-Time: 3.418s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
+URL: https://google.com/adview
+Path: adview
+Status: 204
+Content-Length: 0
+Response-Time: 4.474s
+Content-Type: text/html; charset=UTF-8
+------------------------------------------------------------
