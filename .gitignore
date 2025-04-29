@@ -10,5 +10,3 @@ venv/
 *.yaml
 *.yml
 *.json
-
-test_server.py
