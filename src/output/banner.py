@@ -6,18 +6,22 @@ Author: WaiBui
 License: MIT
 """
 
-def get_banner():
+from src import __version__
+from src.output.logger import Logger
+
+logger = Logger.get_instance()
+
+def get_banner() -> str:
     """Return ASCII art banner for the tool."""
-    return r"""
+    return rf"""
      _____          _____ 
     |  ___|_      _|  ___|
     | |_  \ \ /\ / / |_   
     |  _|  \ V  V /|  _|  
     |_|     \_/\_/ |_|                                                                    
-                            v1.0.0 by WaiBui                                                  
+                            v{__version__} by WaiBui                                                  
     """
 
-def display_banner():
+def print_banner():
     """Print the tool banner."""
-    print(get_banner())
-    print("-"*60)
+    logger.info(get_banner())

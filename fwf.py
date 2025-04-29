@@ -9,56 +9,58 @@ License: MIT
 import sys
 sys.dont_write_bytecode = True
 
-try:    
+try:
     import asyncio
+except ImportError as e:
+    print(f"Error importing required packages: {str(e)}")
+    print("Run: pip install -r requirements.txt")
+    sys.exit(1)
     
-    from src.output.logger import Logger    
+try:
     from src.models.config import ScanConfig
+    from src.output.logger import Logger
     from src.scanner.scanner import FwFScanner
     from src.input.cli_parser import parse_arguments
-    from src.output.banner import display_banner
+    from src.output.banner import print_banner
 except ImportError as e:
-    print("Error importing", str(e))
-    print("Run: pip install -r requirements.txt")
+    print(f"Error importing module: {str(e)}")
+    sys.exit(1)
 
 logger = Logger.get_instance()
 
-async def main():
-    display_banner()
-    
+def main():
     args = parse_arguments()
     
-    logger.set_color_enabled(args.color).set_verbose_enabled(args.verbose)
+    logger.set_color(args.color).set_verbose(args.verbose)
     
     config = ScanConfig(
         url=args.url,
         method=args.method,
         timeout=args.timeout,
         follow_redirects=args.follow_redirects,
-        proxy=args.proxy,
         cookie=args.cookie,
         user_agent=args.user_agent,
-        headers={},
         wordlist=args.wordlist,
         crawl=args.crawl,
         crawl_depth=args.crawl_depth,
         concurrency=args.concurrency,
         retry=args.retry,
         match_codes=args.match_codes,
-        color=args.color,
         output=args.output,
         verbose=args.verbose,
     )
     
+    print_banner()
     scanner = FwFScanner(config)
-    await scanner.scan()
+    asyncio.run(scanner.run())
     
 if __name__ == "__main__":
     try:
-        asyncio.run(main())
+        main()
     except KeyboardInterrupt:
-        logger.debug("User interupted")
-        exit(0)
+        logger = Logger.get_instance()
+        logger.info("[KEYBOARD INTERRUPT] Scan terminated by user")
+        sys.exit(0)
     except Exception as e:
-        exit(0)
-        
+        print(f"Unhandled exception: {str(e)}")
+        sys.exit(1)

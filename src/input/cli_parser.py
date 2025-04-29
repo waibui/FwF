@@ -7,78 +7,74 @@ License: MIT
 """
 
 import argparse
-from src.constants import default
-from src.validators.parse_validator import Validator
-from src.output.logger import Logger
 
-logger = Logger.get_instance()
+from src import __version__
+from src.constants import default as df 
+from src.validator.parser_validator import ParserValidator as pv
 
-def parse_arguments():
+def parse_arguments() -> argparse.Namespace: 
     """
-    Parse command-line arguments and update the provided Config object.
+    Parse command-line arguments.
     """    
     parser = argparse.ArgumentParser(
-        description=default.DESCRIPTION,
-        usage=default.USAGE,
-        epilog=default.EPILOG,
+        description=df.DESCRIPTION,
+        usage=df.USAGE,
+        epilog=df.EPILOG,
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )    
+    
     parser.add_argument(
-        "-V", "--version",
-        action="store_true",
-        help="Show version"
+        '-v', "--version",
+        help="Show tool's version",
+        action="version",
+        version=f"%(prog)s {__version__}"
     )
     
-    # HTTP options
-    http = parser.add_argument_group("http option")
+    # ========== HTTP Options ==========
+    http = parser.add_argument_group("HTTP Option")
     http.add_argument(
         "-u", "--url",
-        type=Validator.is_valid_url,
+        required=True,
+        type=pv.is_valid_url,
         help="Target URL"
     )
     http.add_argument(
         "-X", "--method",
-        type=Validator.valid_http_method,
-        default=default.DEFAULT_METHOD,
+        type=pv.is_valid_method,
+        default=df.DEFAULT_METHOD,
         help="HTTP method to use (e.g., GET, POST)"
+    )
+    http.add_argument(
+        "-t", "--timeout",
+        type=pv.is_positive_number,
+        default=df.DEFAULT_TIMEOUT,
+        help="Request timeout in seconds"
     )
     http.add_argument(
         "-r", "--follow-redirects",
         action="store_true",
-        default=default.DEFAULT_FOLLOW_REDIRECTS,
+        default=df.DEFAULT_FOLLOW_REDIRECTS,
         help="Follow HTTP redirects"
     )
     http.add_argument(
-        "-t", "--timeout",
-        type=Validator.positive_timeout,
-        default=default.DEFAULT_TIMEOUT,
-        help="Request timeout in seconds"
-    )
-    http.add_argument(
-        "-x", "--proxy",
-        type=Validator.valid_proxy,
-        default=None,
-        help="Proxy to use (e.g., 'http://user:pass@proxy.com:8080')"
-    )
-    http.add_argument(
-        "-ck", "--cookie",
-        type=Validator.valid_cookie,
+        "-k", "--cookie",
+        type=pv.is_valid_cookie,
         default=None,
         help="Cookies for requests (e.g., 'key=value,key2=value2')"
     )
     
-    # General options
-    general = parser.add_argument_group("general option")
+    # ========= General Options ==========
+    general = parser.add_argument_group("General Option")
     general.add_argument(
         "-c", "--concurrency",
-        type=Validator.positive_threads,
-        default=default.DEFAULT_CONCURRENCY,
+        type=pv.is_positive_number,
+        default=df.DEFAULT_CONCURRENCY,
         help="Number of concurrent threads"
     )
     general.add_argument(
-        "-rt", "--retry",
-        type=Validator.non_negative_int,
-        default=default.DEFAULT_RETRY,
+        "-y", "--retry",
+        type=pv.is_non_negative,
+        default=df.DEFAULT_RETRY,
         help="Number of times to retry failed requests"
     )
     general.add_argument(
@@ -88,84 +84,56 @@ def parse_arguments():
     )
     general.add_argument(
         "--crawl-depth", 
-        type=Validator.non_negative_int, 
+        type=pv.is_positive_number, 
         default=2, 
         help="Maximum crawl depth"
     )
-    # Input options
-    input = parser.add_argument_group("input option")
+    
+    # ========= Input Options ==========
+    input = parser.add_argument_group("Input Options")
     input.add_argument(
         "-w", "--wordlist",
-        default=default.DEFAULT_WORDLIST,
-        help="Path to wordlist file"
+        type=pv.is_valid_path,
+        default=df.DEFAULT_WORDLIST,
+        help="Path to Wordlist file"
     )
     input.add_argument(
-        "-ua", "--user-agent",
-        default=default.DEFAULT_USERAGENT,
-        help="Path to User-Agent file or static string"
+        "-a", "--user-agent",
+        type=pv.is_valid_path,
+        default=df.DEFAULT_USERAGENT,
+        help="Path to User-Agent file"
     )
     
-    # Output options
+    # ========== Output Options ==========
     output = parser.add_argument_group("output option")
     output.add_argument(
         "--color",
         action="store_true",
-        default=default.DEFAULT_COLOR,
+        default=df.DEFAULT_COLOR,
         help="Disable colored output"
     )
     output.add_argument(
-        "-v", "--verbose",
+        "--verbose",
         action="store_true",
-        default=default.DEFAULT_VERBOSE,
+        default=df.DEFAULT_VERBOSE,
         help="Suppress all non-essential output"
     )
     output.add_argument(
         "-o", "--output",
-        type=Validator.valid_output,
+        type=pv.is_valid_output,
         default=None,
         help="Save output to file (.txt, .log, .json, etc.)"
     )
     
-     # Filter options
+    # ========== Filter Options ==========
     filters = parser.add_argument_group("filter option")
-
     filters.add_argument(
-        "-mc", "--match-codes",
-        type=Validator.valid_match_code,
-        default=default.DEFAULT_STATUS_CODES,
-        help=f"Filter status codes (comma-separated). Default: {default.DEFAULT_STATUS_CODES}"
+        "-m", "--match-codes",
+        type=pv.is_match_code,
+        default=df.DEFAULT_STATUS_CODES,
+        help=f"Filter status codes (comma-separated). Default: {df.DEFAULT_STATUS_CODES}"
     )
-
+    
     args = parser.parse_args()
     
-    if args.version:
-        logger.info("version", default.VERSION)
-        exit(0)
-        
-    if not args.url:
-        logger.error("-u option required")
-        logger.error("use", default.USAGE)
-        exit(0)
-    
     return args
-
-def parse_cookies(cookie_string: str) -> dict:
-    """
-    Parse cookies from a string format like 'key=value,key2=value2' into a dictionary.
-    
-    Args:
-        cookie_string: String containing cookies in 'key=value,key2=value2' format
-        
-    Returns:
-        Dictionary of cookies with key-value pairs
-    """
-    if not cookie_string:
-        return None
-        
-    cookies = {}
-    for cookie_item in cookie_string.split(','):
-        if '=' in cookie_item:
-            key, value = cookie_item.strip().split('=', 1)
-            cookies[key] = value
-    
-    return cookies if cookies else None

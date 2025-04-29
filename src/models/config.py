@@ -7,30 +7,34 @@ License: MIT
 """
 
 from dataclasses import dataclass, field
-from typing import Optional, List, Dict
-from src.constants import default
+from typing import Optional, List
 
 @dataclass
 class ScanConfig:
-    """
-    Data class to hold configuration for a web path scanning session.
-    Includes target info, request options, input settings, and output filters.
-    """
-    url: str = ""
-    method: str = default.DEFAULT_METHOD
-    timeout: float = default.DEFAULT_TIMEOUT
-    follow_redirects: bool = default.DEFAULT_FOLLOW_REDIRECTS
-    proxy: Optional[str] = None
+    """Configuration object for FwF - Fast Web Fuzzer."""
+    # HTTP Options
+    url: Optional[str] = None
+    method: str = "GET"
+    timeout: int = 10
+    follow_redirects: bool = False
     cookie: Optional[str] = None
-    user_agent: str = default.DEFAULT_USERAGENT
-    headers: Dict[str, str] = field(default_factory=dict)
-    wordlist: str = default.DEFAULT_WORDLIST
-    crawl: bool = False
-    concurrency: int = 100
+    
+    # General Options
+    concurrency: int = 10
     retry: int = 0
-    crawl: bool = False,
-    crawl_depth: int = 2,
-    match_codes: List[int] = field(default_factory=lambda: default.DEFAULT_STATUS_CODES)
-    color: bool = default.DEFAULT_COLOR
+    crawl: bool = False
+    crawl_depth: int = 2
+    
+    # Input Options
+    wordlist: str = "wordlists/default.txt"
+    user_agent: str = "wordlists/user-agents.txt"
+    
+    # Output Options
+    color: bool = False
+    verbose: bool = False
     output: Optional[str] = None
-    verbose: bool = default.DEFAULT_VERBOSE
+    
+    # Filter Options
+    match_codes: List[int] = field(default_factory=lambda: [
+        200, 201, 202, 203, 204, 301, 302, 307, 308, 401, 403
+    ])

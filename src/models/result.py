@@ -15,12 +15,10 @@ from typing import Optional
 class ScanResult:
     """Represents the result of a path scan."""
     url: str
-    path: str
     status: int
     content_length: int
     response_time: float
     content_type: Optional[str] = None
-    timestamp: float = field(default_factory=time.time)
     
     def __hash__(self):
         """Make ScanResult hashable for use in sets."""
@@ -31,5 +29,4 @@ class ScanResult:
         if not isinstance(other, ScanResult):
             return False
         return (self.url == other.url and 
-                self.path == other.path and 
                 self.status == other.status)

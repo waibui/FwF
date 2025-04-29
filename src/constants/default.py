@@ -40,7 +40,7 @@ DEFAULT_METHOD = 'GET'
 
 # Default output
 DEFAULT_COLOR = False
-DEFAULT_VERBOSE = True
+DEFAULT_VERBOSE = False
 
 # Default allow
 ALLOW_METHOD = ["GET", "POST", "HEAD", "PUT", "DELETE"]

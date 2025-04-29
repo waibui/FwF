@@ -14,7 +14,6 @@ import yaml
 import xml.dom.minidom as minidom
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from typing import Set, List
 from src.models.result import ScanResult
 from src.output.logger import Logger
 from src.constants.default import ALLOW_OUTPUT_FORMAT
@@ -25,7 +24,7 @@ class FileWriter:
     """Handles writing scan results to various file formats."""
     
     @staticmethod
-    def write_results(results: Set[ScanResult], output_file: str, config=None) -> bool:
+    def write_results(results: list[ScanResult], output_file: str, config=None) -> bool:
         """
         Write scan results to the specified output file.
         
@@ -47,10 +46,10 @@ class FileWriter:
                 logger.error("Output", f"Unsupported file format: {file_ext}. "
                             f"Supported formats: {', '.join(ALLOW_OUTPUT_FORMAT)}")
                 return False
-            
+
             command = " ".join(sys.argv) if len(sys.argv) > 0 else "fwf [unknown command]"
                 
-            sorted_results = sorted(results, key=lambda x: (x.status, x.path))
+            sorted_results = sorted(results, key=lambda x: (x.status, x.url))
             
             if file_ext in ["txt", "log"]:
                 return FileWriter._write_txt(sorted_results, output_file, command)
@@ -75,7 +74,7 @@ class FileWriter:
             return False
     
     @staticmethod
-    def _write_txt(results: List[ScanResult], output_file: str, command: str) -> bool:
+    def _write_txt(results: list[ScanResult], output_file: str, command: str) -> bool:
         """Write results to a plain text file."""
         try:
             with open(output_file, 'w') as f:
@@ -84,7 +83,6 @@ class FileWriter:
                 
                 for result in results:
                     f.write(f"URL: {result.url}\n")
-                    f.write(f"Path: {result.path}\n")
                     f.write(f"Status: {result.status}\n")
                     f.write(f"Content-Length: {result.content_length}\n")
                     f.write(f"Response-Time: {result.response_time:.3f}s\n")
@@ -98,7 +96,7 @@ class FileWriter:
             return False
     
     @staticmethod
-    def _write_json(results: List[ScanResult], output_file: str, command: str) -> bool:
+    def _write_json(results: list[ScanResult], output_file: str, command: str) -> bool:
         """Write results to a JSON file."""
         try:
             data = {
@@ -107,12 +105,11 @@ class FileWriter:
                 "results": [
                     {
                         "url": result.url,
-                        "path": result.path,
+                        "path": result.url,
                         "status": result.status,
                         "content_length": result.content_length,
                         "response_time": round(result.response_time, 3),
                         "content_type": result.content_type or "N/A",
-                        "timestamp": result.timestamp
                     } 
                     for result in results
                 ]
@@ -128,7 +125,7 @@ class FileWriter:
             return False
     
     @staticmethod
-    def _write_csv(results: List[ScanResult], output_file: str, command: str) -> bool:
+    def _write_csv(results: list[ScanResult], output_file: str, command: str) -> bool:
         """Write results to a CSV file."""
         try:
             with open(output_file, 'w', newline='') as f:
@@ -136,12 +133,11 @@ class FileWriter:
                 f.write(f"# Command: {command}\n")
                 f.write(f"# Scan Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                 
-                writer.writerow(['URL', 'Path', 'Status', 'Content-Length', 'Response-Time', 'Content-Type'])
+                writer.writerow(['URL', 'Status', 'Content-Length', 'Response-Time', 'Content-Type'])
                 
                 for result in results:
                     writer.writerow([
                         result.url, 
-                        result.path,
                         result.status,
                         result.content_length,
                         f"{result.response_time:.3f}",
@@ -155,7 +151,7 @@ class FileWriter:
             return False
     
     @staticmethod
-    def _write_xlsx(results: List[ScanResult], output_file: str, command: str) -> bool:
+    def _write_xlsx(results: list[ScanResult], output_file: str, command: str) -> bool:
         """Write results to an Excel file."""
         try:
             try:
@@ -171,7 +167,6 @@ class FileWriter:
             for result in results:
                 data.append({
                     'URL': result.url,
-                    'Path': result.path,
                     'Status': result.status,
                     'Content-Length': result.content_length,
                     'Response-Time': f"{result.response_time:.3f}",
@@ -200,7 +195,7 @@ class FileWriter:
             return False
     
     @staticmethod
-    def _write_yaml(results: List[ScanResult], output_file: str, command: str) -> bool:
+    def _write_yaml(results: list[ScanResult], output_file: str, command: str) -> bool:
         """Write results to a YAML file."""
         try:
             data = {
@@ -209,7 +204,6 @@ class FileWriter:
                 "results": [
                     {
                         "url": result.url,
-                        "path": result.path,
                         "status": result.status,
                         "content_length": result.content_length,
                         "response_time": round(result.response_time, 3),
@@ -229,7 +223,7 @@ class FileWriter:
             return False
     
     @staticmethod
-    def _write_markdown(results: List[ScanResult], output_file: str, command: str) -> bool:
+    def _write_markdown(results: list[ScanResult], output_file: str, command: str) -> bool:
         """Write results to a Markdown file."""
         try:
             with open(output_file, 'w') as f:
@@ -237,11 +231,11 @@ class FileWriter:
                 f.write(f"**Command:** `{command}`\n\n")
                 f.write(f"*Scan completed: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
                 
-                f.write("| URL | Path | Status | Content-Length | Response-Time | Content-Type |\n")
-                f.write("|-----|------|--------|---------------|---------------|-------------|\n")
+                f.write("| URL | Status | Content-Length | Response-Time | Content-Type |\n")
+                f.write("|-----|--------|---------------|---------------|-------------|\n")
                 
                 for result in results:
-                    f.write(f"| {result.url} | {result.path} | {result.status} | ")
+                    f.write(f"| {result.url} | {result.status} | ")
                     f.write(f"{result.content_length} | {result.response_time:.3f}s | ")
                     f.write(f"{result.content_type or 'N/A'} |\n")
                 
@@ -252,7 +246,7 @@ class FileWriter:
             return False
     
     @staticmethod
-    def _write_html(results: List[ScanResult], output_file: str, command: str) -> bool:
+    def _write_html(results: list[ScanResult], output_file: str, command: str) -> bool:
         """Write results to an HTML file."""
         try:
             with open(output_file, 'w') as f:
@@ -281,7 +275,6 @@ class FileWriter:
                 f.write('  <table>\n')
                 f.write('    <tr>\n')
                 f.write('      <th>URL</th>\n')
-                f.write('      <th>Path</th>\n')
                 f.write('      <th>Status</th>\n')
                 f.write('      <th>Content-Length</th>\n')
                 f.write('      <th>Response-Time</th>\n')
@@ -291,7 +284,6 @@ class FileWriter:
                 for result in results:
                     f.write('    <tr>\n')
                     f.write(f'      <td>{result.url}</td>\n')
-                    f.write(f'      <td>{result.path}</td>\n')
                     f.write(f'      <td>{result.status}</td>\n')
                     f.write(f'      <td>{result.content_length}</td>\n')
                     f.write(f'      <td>{result.response_time:.3f}s</td>\n')
@@ -309,7 +301,7 @@ class FileWriter:
             return False
     
     @staticmethod
-    def _write_xml(results: List[ScanResult], output_file: str, command: str) -> bool:
+    def _write_xml(results: list[ScanResult], output_file: str, command: str) -> bool:
         """Write results to an XML file."""
         try:
             root = ET.Element("FwFScanResults")
@@ -321,7 +313,6 @@ class FileWriter:
             for result in results:
                 item = ET.SubElement(results_element, "Result")
                 ET.SubElement(item, "URL").text = result.url
-                ET.SubElement(item, "Path").text = result.path
                 ET.SubElement(item, "Status").text = str(result.status)
                 ET.SubElement(item, "ContentLength").text = str(result.content_length)
                 ET.SubElement(item, "ResponseTime").text = f"{result.response_time:.3f}"

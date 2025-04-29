@@ -1,1 +1,13 @@
 venv/
+
+*.csv
+*.html
+*.log
+*.md
+*.txt
+*.xlsx
+*.xml
+*.yaml
+*.yml
+
+test_server.py

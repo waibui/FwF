@@ -1,157 +1,103 @@
 #!/usr/bin/env python3
+"""
+FwF - Fast Web Fuzzer: A web path discovery tool
+
+Author: WaiBui
+License: MIT
+"""
 
 import time
 import aiohttp
 import asyncio
 import random
-from typing import Set, List
+
 from src.output.logger import Logger
 from src.models.config import ScanConfig
-from src.models.result import ScanResult
-from src.scanner.crawler import WebCrawler
 from src.output.writer import FileWriter
-from src.input.file_loader import load_wordlist, load_user_agent
-from src.input.cli_parser import parse_cookies
+from src.scanner.request import process_request
+from src.input.file_getter import load_wordlist, load_user_agents
+from src.output.scan_info import print_scan_info
+from src.output.summary import print_summary
 
 logger = Logger.get_instance()
 
 class FwFScanner:
+    """Responsible for performing web path discovery scans."""
     def __init__(self, config: ScanConfig):
         self.config = config
-        self.wordlist: Set[str] = set()
-        self.user_agents: List[str] = list()
-        self.found_paths: Set[ScanResult] = set()
-        self.start_time = 0
-        self.crawler = WebCrawler(config) if config.crawl else None
+        self.paths = []
+        self.user_agents = []
+        self.scan_results = []
 
-    def display_input_info(self):
-        logger.info("Starting scan", f"Target: {self.config.url}")
-        logger.info("Method", self.config.method)
-        logger.info("Concurrency", self.config.concurrency)
-        logger.info("Timeout", self.config.timeout)
-        logger.info("Retries", self.config.retry)
-        logger.info("Follow Redirects", self.config.follow_redirects)
-        logger.info("Proxy", self.config.proxy or "None")
-        logger.info("Cookies", self.config.cookie or "None")
-        logger.info("Custom Headers", self.config.headers or "None")
-        logger.info("Status Code Match", self.config.match_codes)
-        logger.info("Crawling Enabled", self.config.crawl)
-        logger.info("Crawl Depth", self.config.crawl_depth if self.config.crawl else "N/A")
-        logger.info("Output File", getattr(self.config, 'output', None) or "None")
-        logger.info("Wordlist Loaded", f"{len(self.wordlist)} entries")
-        logger.info("User-Agents Loaded", f"{len(self.user_agents)} entries")
-        print("-"*60)
+        self.failed_tasks = 0
+                
+    async def run(self):
+        """Run the scan engine"""
+        self.paths = load_wordlist(self.config.wordlist)
+        self.user_agents = load_user_agents(self.config.user_agent)
         
-    async def scan(self):
-        self.start_time = time.time()
-
-        self.wordlist, self.user_agents = await asyncio.gather(
-            load_wordlist(self.config.wordlist),
-            load_user_agent(self.config.user_agent)
-        )
-        self.display_input_info()
-
-        if self.config.crawl:
-            crawled_urls = await self.crawler.crawl(self.config.url, self.config.crawl_depth)
-
-            base_url = self.config.url.rstrip("/")
-            for url in crawled_urls:
-                if url.startswith(base_url):
-                    path = url[len(base_url):].strip("/")
-                    if path:
-                        self.wordlist.add(path)
-
-            logger.info("Crawling", f"Found {len(crawled_urls)} URLs, added {len(self.wordlist)} unique paths")
-
-        await self._perform_scan()
-
+        print_scan_info(self.config)
+        
+        connector, session_timeout = self._config_session_setting()
+        start_time = time.time()
+        
+        await self._execute_tasks(connector, session_timeout)
+       
+        print_summary(start_time, self.scan_results, self.failed_tasks)
+        
         if self.config.output:
-            [FileWriter.write_results(self.found_paths, file) for file in self.config.output.split(',')]
+            [FileWriter.write_results(results=self.scan_results, output_file=output, config=self.config) for output in self.config.output.split(',')]
+    
+    async def _execute_tasks(self, connector: aiohttp.TCPConnector, session_timeout: aiohttp.ClientTimeout):
+        """Execute all path checking tasks and handle results"""
+        try:
+            self.semaphore = asyncio.Semaphore(self.config.concurrency)
             
-        elapsed = time.time() - self.start_time
-        print('-'*60)
-        logger.info("Scan completed", f"{elapsed:.2f}s elapsed, {len(self.found_paths)} paths found")
+            async with aiohttp.ClientSession(
+                timeout=session_timeout,
+                connector=connector
+            ) as session:
+                tasks = [self.create_task(session, path, random.choice(self.user_agents)) for path in self.paths]
+                for future in asyncio.as_completed(tasks):
+                    try:
+                        result = await future
+                        if result:
+                            self.scan_results.append(result)
+                    except Exception as e:
+                        logger.error("[Error completing tasks]", str(e))
+        except Exception as e:
+            logger.error("[Error executing tasks]", str(e))
+        
+    async def create_task(self, session: aiohttp.ClientSession, path: str, user_agent: str):
+        """Create a task that checks a path with retry logic and semaphore control"""
+        retries = self.config.retry
+        while retries >= 0:
+            try:
+                async with self.semaphore:
+                    result = await process_request(session, self.config, path, user_agent)
+                    return result
+            except (asyncio.TimeoutError, aiohttp.ClientError) as e:
+                retries -= 1
+                if retries >= 0:
+                    await asyncio.sleep(0.1)
+            except Exception as e:
+                logger.error("[Unexpected error]", path, str(e))
+                break
+        self.failed_tasks += 1
 
-    async def _perform_scan(self):
+    def _config_session_setting(self) -> tuple[aiohttp.TCPConnector, aiohttp.ClientTimeout]:
+        """Configure HTTP session settings"""
         connector = aiohttp.TCPConnector(
             limit=self.config.concurrency,
-            limit_per_host=self.config.concurrency,
             ttl_dns_cache=300,
-            enable_cleanup_closed=True,
-            force_close=False,
             ssl=False
         )
-        timeout = aiohttp.ClientTimeout(total=self.config.timeout)
-
-        cookies = parse_cookies(self.config.cookie)
-
-        session_kwargs = {
-            'connector': connector,
-            'timeout': timeout,
-        }
-
-        if cookies:
-            session_kwargs['cookies'] = cookies
-
-        if self.config.proxy:
-            session_kwargs['proxy'] = self.config.proxy
-
-        async with aiohttp.ClientSession(**session_kwargs) as session:
-            tasks = []
-            base_url = self.config.url.rstrip("/")
-
-            for path in self.wordlist:
-                if not path.strip() or path.startswith("#"):
-                    continue
-                url = f"{base_url}/{path.strip()}"
-                path_clean = path.strip()
-                tasks.append(asyncio.create_task(self._scan_path(session, url, path_clean)))
-
-            await asyncio.gather(*tasks, return_exceptions=True)
-
-    async def _scan_path(self, session: aiohttp.ClientSession, url: str, path: str):
-        retries_left = self.config.retry
-
-        while retries_left >= 0:
-            try:
-                start_time = time.time()
-                headers = {
-                    "User-Agent": random.choice(self.user_agents) if self.user_agents else "FwFScanner/1.0"
-                }
-
-                if self.config.headers:
-                    headers.update(self.config.headers)
-
-                method = self.config.method.upper()
-
-                request_kwargs = {
-                    'headers': headers,
-                    'allow_redirects': self.config.follow_redirects
-                }
-
-                async with getattr(session, method.lower())(url, **request_kwargs) as response:
-                    response_time = time.time() - start_time
-                    content_length = len(await response.read())
-                    content_type = response.headers.get('Content-Type')
-
-                    if (response.status in self.config.match_codes):
-                        result = ScanResult(
-                            url=url,
-                            path=path,
-                            status=response.status,
-                            content_length=content_length,
-                            response_time=response_time,
-                            content_type=content_type,
-                        )
-                        self.found_paths.add(result)
-                        logger.http(response.status, f"[{method}] {url}", f"{response_time:.3f}s")
-                    return
-            except asyncio.TimeoutError:
-                retries_left -= 1
-                if retries_left >= 0:
-                    await asyncio.sleep(0.5)
-            except Exception as e:
-                break
-
-    def get_results(self) -> Set[ScanResult]:
-        return self.found_paths
+       
+        session_timeout = aiohttp.ClientTimeout(
+            total=None,
+            connect=self.config.timeout,
+            sock_connect=self.config.timeout,
+            sock_read=self.config.timeout
+        )
+       
+        return connector, session_timeout
