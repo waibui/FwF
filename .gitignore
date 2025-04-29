@@ -9,5 +9,6 @@ venv/
 *.xml
 *.yaml
 *.yml
+*.json
 
 test_server.py
