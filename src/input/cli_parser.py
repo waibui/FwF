@@ -77,17 +77,6 @@ def parse_arguments() -> argparse.Namespace:
         default=df.DEFAULT_RETRY,
         help="Number of times to retry failed requests"
     )
-    general.add_argument(
-        "--crawl",
-        action="store_true",
-        help="Crawl the web"
-    )
-    general.add_argument(
-        "--crawl-depth", 
-        type=pv.is_positive_number, 
-        default=2, 
-        help="Maximum crawl depth"
-    )
     
     # ========= Input Options ==========
     input = parser.add_argument_group("Input Options")

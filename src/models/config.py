@@ -22,8 +22,6 @@ class ScanConfig:
     # General Options
     concurrency: int = 10
     retry: int = 0
-    crawl: bool = False
-    crawl_depth: int = 2
     
     # Input Options
     wordlist: str = "wordlists/default.txt"

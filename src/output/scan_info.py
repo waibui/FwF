@@ -23,7 +23,5 @@ def print_scan_info(config: ScanConfig):
     logger.info("::", "Follow Redirects:", config.follow_redirects)
     logger.info("::", "Cookies:", config.cookie or "None")
     logger.info("::", "Match Code:", ", ".join(map(str, config.match_codes)))
-    logger.info("::", "Crawl:", config.crawl)
-    logger.info("::", "Crawl Depth:", config.crawl_depth if config.crawl else "N/A")
     logger.info("::", "Output File:", getattr(config, 'output', None) or "None")
     logger.info("-"*60)

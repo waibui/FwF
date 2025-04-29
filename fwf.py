@@ -41,8 +41,6 @@ def main():
         cookie=args.cookie,
         user_agent=args.user_agent,
         wordlist=args.wordlist,
-        crawl=args.crawl,
-        crawl_depth=args.crawl_depth,
         concurrency=args.concurrency,
         retry=args.retry,
         match_codes=args.match_codes,
