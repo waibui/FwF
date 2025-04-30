@@ -120,7 +120,7 @@ def parse_arguments() -> argparse.Namespace:
         "-m", "--match-codes",
         type=pv.is_match_code,
         default=df.DEFAULT_STATUS_CODES,
-        help=f"Filter status codes (comma-separated). Default: {df.DEFAULT_STATUS_CODES}"
+        help=f"Filter status codes (comma-separated)."
     )
     
     args = parser.parse_args()
