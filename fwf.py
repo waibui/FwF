@@ -31,7 +31,6 @@ logger = Logger.get_instance()
 def main():
     args = parse_arguments()
     
-    logger.info(args)
     logger.set_color(args.color).set_verbose(args.verbose)
     
     config = ScanConfig(
