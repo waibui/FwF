@@ -87,3 +87,19 @@ class ParserValidator:
         if not set(codes).issubset(set(df.DEFAULT_STATUS_CODES)):
             raise argparse.ArgumentTypeError(f"Invalid match codes: {codes}. Allowed values: {df.DEFAULT_STATUS_CODES}.")
         return codes
+    
+    @staticmethod
+    def parse_key_value_string(value: str) -> dict:
+        """
+        Parse and validate a key=value,key2=value2 string into a dictionary.
+        """
+        result = {}
+        parts = [item.strip() for item in value.split(',')]
+        for item in parts:
+            if '=' not in item:
+                raise argparse.ArgumentTypeError(
+                    f"Invalid format for key-value pair: '{item}'. Use 'key=value,key2=value2'"
+                )
+            key, val = item.split('=', 1)
+            result[key.strip()] = val.strip()
+        return result

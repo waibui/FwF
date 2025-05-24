@@ -7,7 +7,7 @@ License: MIT
 """
 
 from dataclasses import dataclass, field
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 @dataclass
 class ScanConfig:
@@ -18,6 +18,8 @@ class ScanConfig:
     timeout: int = 10
     follow_redirects: bool = False
     cookie: Optional[str] = None
+    params: Optional[Dict[str, str]] = None 
+    data: Optional[Dict[str, str]] = None  
     
     # General Options
     concurrency: int = 10

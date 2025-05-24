@@ -71,13 +71,16 @@ class FwFScanner:
     async def create_task(self, session: aiohttp.ClientSession, path: str, user_agent: str):
         """Create a task that checks a path with retry logic and semaphore control"""
         retries = self.config.retry
+        attempt = 0
         while retries >= 0:
             try:
                 async with self.semaphore:
                     result = await process_request(session, self.config, path, user_agent)
                     return result
             except (asyncio.TimeoutError, aiohttp.ClientError) as e:
+                logger.warning(f"[Retry {attempt}] {self.config.url}/{path}")
                 retries -= 1
+                attempt += 1
                 if retries >= 0:
                     await asyncio.sleep(0.1)
             except Exception as e:

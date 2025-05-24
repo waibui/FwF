@@ -33,9 +33,11 @@ async def process_request(session: aiohttp.ClientSession, config: ScanConfig, pa
 
     request_kwargs = {
         'headers': headers,
-        'allow_redirects': config.follow_redirects
+        'allow_redirects': config.follow_redirects,
+        'params': config.params,
+        'data': config.data
     }
-
+    
     method_func = {
         "get": session.get,
         "post": session.post,
