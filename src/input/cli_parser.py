@@ -66,15 +66,15 @@ def parse_arguments() -> argparse.Namespace:
         "-p", "--params",
         type=pv.parse_key_value_string,
         default=None,
-        help="Cookies for requests (e.g., 'key=value,key2=value2')"
+        help="Query parameters for the request (e.g., 'key=value,key2=value2')"
     )
     http.add_argument(
         "-d", "--data",
         type=pv.parse_key_value_string,
         default=None,
-        help="Cookies for requests (e.g., 'key=value,key2=value2')"
+        help="Request body data (for POST, PUT, etc.) (e.g., 'key=value,key2=value2')"
     )
-    
+
     # ========= General Options ==========
     general = parser.add_argument_group("General Option")
     general.add_argument(
